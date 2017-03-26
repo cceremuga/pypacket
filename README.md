@@ -1,15 +1,23 @@
-# PyPacket
+     ___      ___         _       _
+    | _ \_  _| _ \__ _ __| |_____| |_
+    |  _/ || |  _/ _` / _| / / -_)  _|
+    |_|  \_, |_| \__,_\__|_\_\___|\__|
+         |__/
 
-A simple console logger to receive APRS packets via rtl_fm (RTL-SDR) and multimon-ng. This project serves as an open source expirimental tool for research into the RF spectrum and APRS. Additionally, it's a means for me to get back into python, learning code style, formatting and conventions.
+A simple CLI logger to receive and decode APRS packets via rtl_fm (RTL-SDR) and multimon-ng. This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
+
+Additionally, it serves a means for me personally to get back into python, establishing formatting and conventions.
 
 ## Requirements
 
-Requires the following to be installed and configured on your system. At this time, you are on your own with regards to dependency setup. There are significant pieces of this which are hard coded and have no configurability options. See the Future Plans section for more info.
+Requires the following to be installed and configured on your system in order to run.
 
-* Python v2.x
-* rtl_fm
-* multimon-ng
+* Python >= v3.5
+* [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
+* [multimon-ng](https://github.com/EliasOenal/multimon-ng)
 * An RTL-SDR compatible device
+
+At this time, you are on your own with regards to dependency setup. There are significant pieces of this which are hard coded and have no configurability options. See the Future Plans section for more info.
 
 ## Future Plans
 
@@ -20,7 +28,7 @@ Requires the following to be installed and configured on your system. At this ti
 
 ## Contributing
 
-Please contribute by submitting pull requests on GitHub as you wish!
+You are welcome to contribute by submitting pull requests on GitHub as you see fit!
 
 ## Credits
 
