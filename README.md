@@ -6,25 +6,37 @@
 
 A simple CLI logger to receive and decode APRS packets via rtl_fm (RTL-SDR) and multimon-ng. This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
 
-Additionally, it serves a means for me personally to get back into python, establishing formatting and conventions.
-
 ## Requirements
 
 Requires the following to be installed and configured on your system in order to run.
 
+* Some form of Linux OS. MacOS, possibly. Windows, doubtful.
+* An RTL-SDR compatible device.
 * Python >= v3.5
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
-* An RTL-SDR compatible device
 
 At this time, you are on your own with regards to dependency setup. There are significant pieces of this which are hard coded and have no configurability options. See the Future Plans section for more info.
 
+## Running
+
+From the directory you've cloned the repository to, simply execute `python main.py`. The application will start and immediately begin listening on 144.39Mhz. Logged packets will be output to your terminal.
+
+## Patch Notes
+
+* 3/27/17
+    * Restructured files to use proper Python module organization.
+    * Basic framework for logging.
+    * Resolved an exception involving unparseable decoded data.
+
 ## Future Plans
 
-* Simple TCP server (for use in Xastir etc.).
-* Command line configuration options for frequency, gain, etc.
-* Better documentation.
-* Performance optimization.
+* APRS frame deserialization for human readability, likely.
+* Simple TCP server (for use in Xastir etc.), likely.
+* Command line configuration options for frequency, gain, definitely.
+* Better documentation, definitely.
+* Performance optimization, probably.
+* Custom IGate uploading, maybe.
 
 ## Contributing
 
