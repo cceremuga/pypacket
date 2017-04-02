@@ -2,14 +2,15 @@
 
 import time
 from pypacket.base.listener import Listener
+from pypacket.util.colors import Colors
 
-print("""\033[92m
+print(Colors.GREEN + """
   ___      ___         _       _
  | _ \_  _| _ \__ _ __| |_____| |_
  |  _/ || |  _/ _` / _| / / -_)  _|
  |_|  \_, |_| \__,_\__|_\_\___|\__|
       |__/
-\033[0m""")
+""" + Colors.RESET)
 
 # The main runner.
 pypacket_runtime = Listener()

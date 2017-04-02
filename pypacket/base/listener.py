@@ -40,7 +40,7 @@ class Listener:
     def stop(self):
         self.sub_processes['rtl'].terminate()
         self.sub_processes['multimon'].terminate()
-        self.log_handler.log_info('\n\nTerminate command received, exiting!')
+        self.log_handler.log_info('Exiting!')
         sys.exit(0)
 
     def multimon_worker(self):

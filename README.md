@@ -4,9 +4,9 @@
     |_|  \_, |_| \__,_\__|_\_\___|\__|
          |__/
 
-A simple CLI logger to receive and decode APRS packets via rtl_fm (RTL-SDR) and multimon-ng. This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
+A simple CLI logger to receive and decode APRS packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
 
-## Requirements
+## Dependencies
 
 Requires the following to be installed and configured on your system in order to run.
 
@@ -16,7 +16,7 @@ Requires the following to be installed and configured on your system in order to
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
 
-At this time, you are on your own with regards to dependency setup. There are significant pieces of this which are hard coded and have no configurability options. See the Future Plans section for more info.
+Note, there are significant pieces of this which are hard coded and have no configurability options. See the Future Plans section for more info.
 
 ## Running
 
@@ -24,6 +24,8 @@ From the directory you've cloned the repository to, simply execute `python main.
 
 ## Patch Notes
 
+* 4/1/17
+    * Console colors are now constants.
 * 3/27/17
     * Restructured files to use proper Python module organization.
     * Basic framework for logging.
@@ -44,4 +46,6 @@ You are welcome to contribute by submitting pull requests on GitHub as you see f
 
 ## Credits
 
-This project makes use of some code / inspiration from [pimultimonaprs](https://github.com/asdil12/pymultimonaprs) and as such, retains the GPLv3 license of its predecessor.
+Thanks to the following projects / libraries for open source code / inspiration.
+
+* [pimultimonaprs](https://github.com/asdil12/pymultimonaprs)
