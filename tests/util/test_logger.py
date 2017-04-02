@@ -6,12 +6,13 @@ class TestLogger:
 
     def test_log_info_expect_logged(self, capsys):
         mockInfo = 'Hey, check out this info.'
-        expectedInfo = Logger.SYS_PREFIX + mockInfo + self.PRINT_SUFFIX
+        expectedInfo = Colors.BLUE + Logger.SYS_PREFIX + Colors.RESET + \
+            mockInfo + self.PRINT_SUFFIX
 
         Logger().log_info(mockInfo)
 
         out, err = capsys.readouterr()
-        assert expectedInfo == out
+        assert out == expectedInfo
 
     def test_log_error_expect_logged(self, capsys):
         mockError = 'Hey, check out this error.'
@@ -21,7 +22,7 @@ class TestLogger:
         Logger().log_error(mockError)
 
         out, err = capsys.readouterr()
-        assert expectedError == out
+        assert out == expectedError
 
     def test_log_warn_expect_logged(self, capsys):
         mockWarn = 'Hey, check out this warning.'
@@ -31,7 +32,7 @@ class TestLogger:
         Logger().log_warn(mockWarn)
 
         out, err = capsys.readouterr()
-        assert expectedWarn == out
+        assert out == expectedWarn
 
     def test_log_packet_expect_logged(self, capsys):
         mockPacket = 'Hey, check out this packet.'
@@ -41,4 +42,4 @@ class TestLogger:
         Logger().log_packet(mockPacket)
 
         out, err = capsys.readouterr()
-        assert expectedPacket == out
+        assert out == expectedPacket
