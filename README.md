@@ -6,6 +6,8 @@
 
 A simple CLI logger to receive and decode APRS packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
 
+[![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket)
+
 ## Dependencies
 
 Requires the following to be installed and configured on your system in order to run.
@@ -38,11 +40,12 @@ From the directory you've cloned the repository to, simply execute `python main.
 
 ## Future Plans
 
+* Quality code coverage, it's happening.
+* Better documentation, definitely.
+* Command line configuration options for frequency, gain, definitely.
+* Performance optimization, probably.
 * APRS frame deserialization for human readability, likely.
 * Simple TCP server (for use in Xastir etc.), likely.
-* Command line configuration options for frequency, gain, definitely.
-* Better documentation, definitely.
-* Performance optimization, probably.
 * Custom IGate uploading, maybe.
 
 ## Contributing
