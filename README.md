@@ -15,6 +15,8 @@ Requires the following to be installed and configured on your system in order to
 * Python >= v3.5
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
+* [pip](https://pypi.python.org/pypi/pip)
+* [pytest](https://docs.pytest.org/en/latest/) (if you want to run tests)
 
 Note, there are significant pieces of this which are hard coded and have no configurability options. See the Future Plans section for more info.
 
@@ -24,6 +26,8 @@ From the directory you've cloned the repository to, simply execute `python main.
 
 ## Patch Notes
 
+* 4/2/17
+    * Start of unit tests.
 * 4/1/17
     * Console colors are now constants.
 * 3/27/17
