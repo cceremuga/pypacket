@@ -28,6 +28,7 @@ From the directory you've cloned the repository to, simply execute `python main.
 
 * 4/2/17
     * Start of unit tests.
+    * Travis CI integration.
 * 4/1/17
     * Console colors are now constants.
 * 3/27/17
