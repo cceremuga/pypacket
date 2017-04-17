@@ -12,7 +12,7 @@ A simple CLI logger to receive and decode APRS packets via rtl_fm ([RTL-SDR](htt
 
 Requires the following to be installed and configured on your system in order to run.
 
-* Some form of Linux OS. MacOS, possibly. Windows, doubtful.
+* Some form of Linux flavor. MacOS, possibly. Windows, doubtful.
 * An RTL-SDR compatible device.
 * Python >= v3.5
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
@@ -28,6 +28,8 @@ From the directory you've cloned the repository to, simply execute `python main.
 
 ## Patch Notes
 
+* 4/17/17
+    * Logging runtime activities to file in the logs subdirectory.
 * 4/2/17
     * Start of unit tests.
     * Travis CI integration.
@@ -40,11 +42,11 @@ From the directory you've cloned the repository to, simply execute `python main.
 
 ## Future Plans
 
+* JSON configuration options for frequency, gain, in progress.
+* APRS frame deserialization for human readability, on deck.
 * Quality code coverage, it's happening.
 * Better documentation, definitely.
-* Command line configuration options for frequency, gain, definitely.
 * Performance optimization, probably.
-* APRS frame deserialization for human readability, likely.
 * Simple TCP server (for use in Xastir etc.), likely.
 * Custom IGate uploading, maybe.
 
