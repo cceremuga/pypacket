@@ -5,8 +5,9 @@ import sys
 from pypacket.util.logger import Logger
 
 class Listener:
-    def __init__(self):
-        self.log_handler = Logger()
+    def __init__(self, log_handler, config):
+        self.config = config
+        self.log_handler = log_handler
         self.sub_processes = {}
         self.start()
         self.is_running = True
@@ -19,8 +20,8 @@ class Listener:
         self.log_handler.log_info('Starting rtl_fm subprocess.')
 
         rtl_subprocess = subprocess.Popen(
-            ['rtl_fm', '-f', '144390000', '-s', '22050', '-o', '4',
-            '-g', '49.6', '-'],
+            ['rtl_fm', '-f', self.config.frequency(), '-s', '22050', '-o', '4',
+            '-g', self.config.gain(), '-'],
             stdout=subprocess.PIPE, stderr=open('/dev/null')
         )
 

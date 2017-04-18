@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import time
-from time import localtime, strftime
-import logging
+from pypacket.util.logger import Logger
 from pypacket.base.listener import Listener
+from pypacket.base.configuration import Configuration
 from pypacket.util.colors import Colors
 
 print(Colors.GREEN + """
@@ -15,13 +15,13 @@ print(Colors.GREEN + """
 """ + Colors.RESET)
 
 # Configure logging.
-logFormat = '[%(asctime)-15s] [%(levelname)s] %(message)s'
-logging.basicConfig(filename='logs/pypacket_' + \
-    strftime("%Y_%m_%d_%H_%M_%S", localtime()) + '.log', \
-    format=logFormat, level=logging.INFO)
+log_handler = Logger()
+
+# Initialize configuration.
+runtime_configuration = Configuration()
 
 # The main runner.
-pypacket_runtime = Listener()
+pypacket_runtime = Listener(log_handler, runtime_configuration)
 
 # Handles Control+c interrupts, existing the main loop and threads.
 try:

@@ -1,8 +1,4 @@
-     ___      ___         _       _
-    | _ \_  _| _ \__ _ __| |_____| |_
-    |  _/ || |  _/ _` / _| / / -_)  _|
-    |_|  \_, |_| \__,_\__|_\_\___|\__|
-         |__/
+![PyPacket](https://i.imgur.com/MZYHAFG.png "PyPacket")
 
 A simple CLI logger to receive and decode APRS packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
 
@@ -20,35 +16,37 @@ Requires the following to be installed and configured on your system in order to
 * [pip](https://pypi.python.org/pypi/pip)
 * [pytest](https://docs.pytest.org/en/latest/) (if you want to run tests)
 
-Note, there are significant pieces of this which are hard coded and have no configurability options. See the Future Plans section for more info.
+## Configuration
+
+The `config/configuration.json` file contains all of the current configuration options including frequency, gain, etc. More options will be added as needed.
 
 ## Running
 
-From the directory you've cloned the repository to, simply execute `python main.py`. The application will start and immediately begin listening on 144.39Mhz. Logged packets will be output to your terminal.
+From the directory you've cloned the repository to, simply execute `python main.py`. The application will start and immediately begin listening on the configured frequency.
 
-## Patch Notes
+Logged packets will be output to your terminal and written to a file in the `logs` directory.
 
+## Recent Patch Notes
+
+* 4/18/17
+    * Basic JSON-based configuration support.
+    * Improved logging.
+    * Resolved bug when logs directory did not exist.
 * 4/17/17
     * Logging runtime activities to file in the logs subdirectory.
 * 4/2/17
     * Start of unit tests.
     * Travis CI integration.
-* 4/1/17
-    * Console colors are now constants.
-* 3/27/17
-    * Restructured files to use proper Python module organization.
-    * Basic framework for logging.
-    * Resolved an exception involving unparseable decoded data.
 
-## Future Plans
+## Current / Future Plans
 
-* JSON configuration options for frequency, gain, in progress.
-* APRS frame deserialization for human readability, on deck.
-* Quality code coverage, it's happening.
-* Better documentation, definitely.
-* Performance optimization, probably.
-* Simple TCP server (for use in Xastir etc.), likely.
-* Custom IGate uploading, maybe.
+* JSON configuration options for frequency, gain [in progress].
+* APRS frame deserialization for human readability [future].
+* Quality code coverage [future].
+* Better documentation [future].
+* Performance optimization [future].
+* Simple TCP server (for use in Xastir etc.) [future].
+* Custom IGate uploading [future].
 
 ## Contributing
 
@@ -59,3 +57,4 @@ You are welcome to contribute by submitting pull requests on GitHub as you see f
 Thanks to the following projects / libraries for open source code / inspiration.
 
 * [pimultimonaprs](https://github.com/asdil12/pymultimonaprs)
+* [The Noun Project](https://thenounproject.com/search/?q=radio%20tower&i=749293)
