@@ -1,12 +1,12 @@
-![PyPacket](https://i.imgur.com/MZYHAFG.png "PyPacket")
+<p align="center"><img src="https://i.imgur.com/MZYHAFG.png" /></p>
 
-A simple CLI logger to receive and decode APRS packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
+A simple CLI tool to receive, decode, log [APRS](http://www.aprs.org/) packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
 
 [![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket)
 
-## Dependencies
+## Requirements
 
-Requires the following to be installed and configured on your system in order to run.
+The following are required to be installed and configured on your system.
 
 * Some form of Linux flavor. MacOS, possibly. Windows, doubtful.
 * An RTL-SDR compatible device.
@@ -18,43 +18,44 @@ Requires the following to be installed and configured on your system in order to
 
 ## Configuration
 
-The `config/configuration.json` file contains all of the current configuration options including frequency, gain, etc. More options will be added as needed.
+The `config/configuration.json` file contains all of the configuration options including frequency, gain, etc. More options will be added as needed.
 
 ## Running
 
-From the directory you've cloned the repository to, simply execute `python main.py`. The application will start and immediately begin listening on the configured frequency.
+From the directory you've cloned the repository to, simply run `python main.py` in the shell of your choice. The application will start and immediately begin listening on the configured frequency.
 
 Logged packets will be output to your terminal and written to a file in the `logs` directory.
 
 ## Recent Patch Notes
 
-* 4/18/17
-    * Basic JSON-based configuration support.
+* 4/18/2017 (v1.0)
+    * Improved RTL settings.
+    * Completed JSON configuration support.
     * Improved logging.
     * Resolved bug when logs directory did not exist.
-* 4/17/17
+* 4/17/2017 (v0.9)
     * Logging runtime activities to file in the logs subdirectory.
-* 4/2/17
+* 4/2/2017 (v0.8)
     * Start of unit tests.
     * Travis CI integration.
 
-## Current / Future Plans
+## Feature Roadmap
 
-* JSON configuration options for frequency, gain [in progress].
-* APRS frame deserialization for human readability [future].
-* Quality code coverage [future].
-* Better documentation [future].
-* Performance optimization [future].
-* Simple TCP server (for use in Xastir etc.) [future].
-* Custom IGate uploading [future].
+* APRS frame deserialization for human readability [v2.0].
+* Better documentation [v2.0].
+* Performance optimization [v2.0].
+* Simple TCP server (for use in Xastir etc.) [v3.0].
+* Custom IGate uploading [v4.0].
 
 ## Contributing
 
-You are welcome to contribute by submitting pull requests on GitHub as you see fit!
+You are welcome to contribute by submitting pull requests on GitHub if you are interested in development.
+
+Feature / enhancement requests may be submitted via GitHub issues.
 
 ## Credits
 
-Thanks to the following projects / libraries for open source code / inspiration.
+Thanks to the following projects / libraries for open source code / inspiration / Creative Commons resources.
 
 * [pimultimonaprs](https://github.com/asdil12/pymultimonaprs)
 * [The Noun Project](https://thenounproject.com/search/?q=radio%20tower&i=749293)

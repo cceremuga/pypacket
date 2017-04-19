@@ -20,8 +20,8 @@ class Listener:
         self.log_handler.log_info('Starting rtl_fm subprocess.')
 
         rtl_subprocess = subprocess.Popen(
-            ['rtl_fm', '-f', self.config.frequency(), '-s', '22050', '-o', '4',
-            '-g', self.config.gain(), '-'],
+            ['rtl_fm', '-M', 'fm', '-f', self.config.frequency(), '-s',
+            self.config.sample_rate(), '-l', '0', '-g', self.config.gain(), '-'],
             stdout=subprocess.PIPE, stderr=open('/dev/null')
         )
 

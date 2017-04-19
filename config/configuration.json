@@ -1,6 +1,7 @@
 {
-    "radio": {
+    "rtl": {
         "frequency": "144390000",
-        "gain": "49.6"
+        "gain": "49.6",
+        "sample_rate": "22050"
     }
 }
