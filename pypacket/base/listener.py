@@ -44,19 +44,31 @@ class Listener:
         self.log_handler.log_info('Exiting!')
         sys.exit(0)
 
+    def process_decoded_packet(self, decoded_packet):
+        self.log_handler.log_packet(decoded_packet)
+
+    def clean_decoded_packet(self, decoded_packet):
+        # The first 6 characters are not valid APRS packet components.
+        aprs_match = re.compile(r'^APRS: (.*)') \
+            .match(decoded_packet)
+        if aprs_match:
+            return aprs_match.group(1)
+
+        return None
+
     def multimon_worker(self):
         # This worker lives in its own thread and processes received packets.
         self.log_handler.log_info('Worker thread starting, listening.')
 
         while self.is_running:
             try:
-                multimon_line_output = self.sub_processes['multimon'] \
+                decoded_packet = self.sub_processes['multimon'] \
                     .stdout.readline().decode('utf-8').strip()
 
-                # The first 6 characters are not valid APRS packet components.
-                aprs_match = re.compile(r'^APRS: (.*)') \
-                    .match(multimon_line_output)
-                if aprs_match:
-                    self.log_handler.log_packet(aprs_match.group(1))
+                cleaned_packet = self.clean_decoded_packet(decoded_packet)
+
+                if cleaned_packet is not None:
+                    self.process_decoded_packet(cleaned_packet)
+
             except UnicodeDecodeError:
-                self.log_handler.log_warn('Unable to parse packet.')
+                self.log_handler.log_warn('Unable to decode packet.')
