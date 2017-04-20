@@ -28,7 +28,7 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
-* XX/XX/XXXX (v1.1)
+* 4/19/2017 (v1.1)
     * All current code documented.
 * 4/18/2017 (v1.0)
     * Improved RTL settings.
