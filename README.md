@@ -28,6 +28,8 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
+* 4/19/2017 (v1.1)
+    * All current code documented.
 * 4/18/2017 (v1.0)
     * Improved RTL settings.
     * Completed JSON configuration support.
@@ -35,14 +37,11 @@ Logged packets will be output to your terminal and written to a file in the `log
     * Resolved bug when logs directory did not exist.
 * 4/17/2017 (v0.9)
     * Logging runtime activities to file in the logs subdirectory.
-* 4/2/2017 (v0.8)
-    * Start of unit tests.
-    * Travis CI integration.
 
 ## Feature Roadmap
 
+* Better documentation [v1.1].
 * APRS frame deserialization for human readability [v2.0].
-* Better documentation [v2.0].
 * Performance optimization [v2.0].
 * Simple TCP server (for use in Xastir etc.) [v3.0].
 * Custom IGate uploading [v4.0].
