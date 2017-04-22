@@ -24,10 +24,11 @@ class Listener:
         worker_thread: A separate thread handling all subprocesses.
     """
 
-    def __init__(self, log_handler, config):
+    def __init__(self, log_handler, deserializer, config):
         """Initializes the instance of Listener and starts listening."""
         self.config = config
         self.log_handler = log_handler
+        self.deserializer = deserializer
         self.sub_processes = {}
         self.start()
         self.is_running = True
@@ -74,6 +75,8 @@ class Listener:
             decoded_packet: The raw, decoded APRS packet string.
         """
         self.log_handler.log_packet(decoded_packet)
+        print_friendly_packet = self.deserializer.to_readable_output(decoded_packet)
+        self.log_handler.log_any('\033[92m', '[REC] ', print_friendly_packet)
 
     def clean_decoded_packet(self, decoded_packet):
         """Multimon-ng returns a string which starts with 'APRS: '.

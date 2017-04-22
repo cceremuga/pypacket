@@ -46,13 +46,12 @@ class Logger:
         logging.warning(logMessage)
 
     def log_packet(self, logMessage):
-        """Logs a packet message to console, file. Intended to log friendly,
-        readable, decoded APRS packets.
+        """Logs a raw packet message to file. Intended to log raw,
+        decoded APRS packets.
 
         Args:
             logMessage: The string message to log.
         """
-        self.log_any(Colors.GREEN, self.REC_PREFIX, logMessage)
         logging.info(logMessage)
 
     def log_any(self, color, prefix, logMessage):
