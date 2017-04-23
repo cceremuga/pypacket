@@ -13,12 +13,7 @@ class Configuration:
     def __init__(self):
         """Initializes the instance of Configuration, loading in JSON data."""
         self.data = {}
-        self.load()
-
-    def load(self):
-        """Loads in JSON data from the config file, assigning to data."""
-        with open(self.CONFIG_FILE_NAME) as json_data_file:
-            self.data = json.load(json_data_file)
+        self.__load()
 
     def frequency(self):
         """Gets the configured RTL frequency setting."""
@@ -31,3 +26,8 @@ class Configuration:
     def sample_rate(self):
         """Gets the configured RTL sample rate setting."""
         return self.data['rtl']['sample_rate']
+
+    def __load(self):
+        """Loads in JSON data from the config file, assigning to data."""
+        with open(self.CONFIG_FILE_NAME) as json_data_file:
+            self.data = json.load(json_data_file)

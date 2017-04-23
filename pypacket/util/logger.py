@@ -16,7 +16,7 @@ class Logger:
 
     def __init__(self):
         """Sets up the logger, via calling setup()."""
-        self.setup()
+        self.__setup()
 
     def log_info(self, logMessage):
         """Logs an info message to console, file.
@@ -24,7 +24,7 @@ class Logger:
         Args:
             logMessage: The string message to log.
         """
-        self.log_any(Colors.BLUE, self.SYS_PREFIX, logMessage)
+        self.__log_any(Colors.BLUE, self.SYS_PREFIX, logMessage)
         logging.info(logMessage)
 
     def log_error(self, logMessage):
@@ -33,7 +33,7 @@ class Logger:
         Args:
             logMessage: The string message to log.
         """
-        self.log_any(Colors.RED, self.ERR_PREFIX, logMessage)
+        self.__log_any(Colors.RED, self.ERR_PREFIX, logMessage)
         logging.error(logMessage)
 
     def log_warn(self, logMessage):
@@ -42,7 +42,7 @@ class Logger:
         Args:
             logMessage: The string message to log.
         """
-        self.log_any(Colors.YELLOW, self.WRN_PREFIX, logMessage)
+        self.__log_any(Colors.YELLOW, self.WRN_PREFIX, logMessage)
         logging.warning(logMessage)
 
     def log_packet(self, rawMessage, friendlyMessage):
@@ -54,10 +54,10 @@ class Logger:
             rawMessage: The raw string message to log to file.
             friendlyMessage: The user friendly message to log to CLI.
         """
-        self.log_any(Colors.GREEN, self.REC_PREFIX, friendlyMessage)
+        self.__log_any(Colors.GREEN, self.REC_PREFIX, friendlyMessage)
         logging.info(rawMessage)
 
-    def log_any(self, color, prefix, logMessage):
+    def __log_any(self, color, prefix, logMessage):
         """Logs any message to system console.
 
         Args:
@@ -67,7 +67,7 @@ class Logger:
         """
         print(color + prefix + Colors.RESET + logMessage)
 
-    def setup(self):
+    def __setup(self):
         """Sets up the logger. First checks to see if the log directory exists.
         If the directory does not exist, it creates it.
 
