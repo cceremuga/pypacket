@@ -74,9 +74,9 @@ class Listener:
         Args:
             decoded_packet: The raw, decoded APRS packet string.
         """
-        self.log_handler.log_packet(decoded_packet)
-        print_friendly_packet = self.deserializer.to_readable_output(decoded_packet)
-        self.log_handler.log_any('\033[92m', '[REC] ', print_friendly_packet)
+        print_friendly_packet = \
+            self.deserializer.to_readable_output(decoded_packet)
+        self.log_handler.log_packet(decoded_packet, print_friendly_packet)
 
     def clean_decoded_packet(self, decoded_packet):
         """Multimon-ng returns a string which starts with 'APRS: '.

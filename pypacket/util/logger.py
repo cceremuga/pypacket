@@ -45,14 +45,17 @@ class Logger:
         self.log_any(Colors.YELLOW, self.WRN_PREFIX, logMessage)
         logging.warning(logMessage)
 
-    def log_packet(self, logMessage):
-        """Logs a raw packet message to file. Intended to log raw,
-        decoded APRS packets.
+    def log_packet(self, rawMessage, friendlyMessage):
+        """Logs a raw packet message to file, friendly to console.
+        Intended to log raw, decoded APRS packets to file with a user-readable
+        version to the CLI.
 
         Args:
-            logMessage: The string message to log.
+            rawMessage: The raw string message to log to file.
+            friendlyMessage: The user friendly message to log to CLI.
         """
-        logging.info(logMessage)
+        self.log_any(Colors.GREEN, self.REC_PREFIX, friendlyMessage)
+        logging.info(rawMessage)
 
     def log_any(self, color, prefix, logMessage):
         """Logs any message to system console.

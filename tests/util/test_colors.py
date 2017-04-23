@@ -20,3 +20,7 @@ class TestColors:
     def test_blue_expect_blue_value(self):
         expected_color = '\033[94m'
         assert Colors.BLUE == expected_color
+
+    def test_bold_expect_bold_value(self):
+        expected_value = '\033[;1m'
+        assert Colors.BOLD == expected_value
