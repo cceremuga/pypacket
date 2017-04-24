@@ -14,6 +14,7 @@ The following are required to be installed and configured on your system.
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
 * [pip](https://pypi.python.org/pypi/pip)
+* [aprslib] (https://pypi.python.org/pypi/aprslib)
 * [pytest](https://docs.pytest.org/en/latest/) (if you want to run tests)
 
 ## Configuration
@@ -28,8 +29,11 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
-* 4/19/2017 (v1.1)
-    * All current code documented.
+* 4/24/2017 (v2.0)
+    * APRS frame deserialization (see requirements for new dependencies).
+    * Code fully documented.
+    * Main utilities unit tested. Listener class still forthcoming.
+    * Code cleanup, refactoring, optimization.
 * 4/18/2017 (v1.0)
     * Improved RTL settings.
     * Completed JSON configuration support.
@@ -40,11 +44,9 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Feature Roadmap
 
-* Better documentation [v1.1].
-* APRS frame deserialization for human readability [v2.0].
-* Performance optimization [v2.0].
 * Simple TCP server (for use in Xastir etc.) [v3.0].
 * Custom IGate uploading [v4.0].
+* Support for other capture methods [unknown].
 
 ## Contributing
 

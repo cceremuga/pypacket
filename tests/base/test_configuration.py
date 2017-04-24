@@ -1,7 +1,7 @@
 from pypacket.base.configuration import Configuration
 
 class TestConfiguration:
-    def test_frequency_expect_frequency(self, capsys):
+    def test_frequency_expect_frequency(self):
         test_configuration = Configuration()
         expected_frequency = '144390000'
 
@@ -9,7 +9,7 @@ class TestConfiguration:
 
         assert actual_frequency == expected_frequency
 
-    def test_sample_rate_expect_sample_rate(self, capsys):
+    def test_sample_rate_expect_sample_rate(self):
         test_configuration = Configuration()
         expected_sample_rate = '22050'
 
@@ -17,7 +17,7 @@ class TestConfiguration:
 
         assert actual_sample_rate == expected_sample_rate
 
-    def test_gain_expect_gain(self, capsys):
+    def test_gain_expect_gain(self):
         test_configuration = Configuration()
         expected_gain = '49.6'
 

@@ -39,7 +39,7 @@ class TestLogger:
         expected_packet = Colors.GREEN + Logger.REC_PREFIX + Colors.RESET + \
             mock_packet + self.PRINT_SUFFIX
 
-        Logger().log_packet(mock_packet)
+        Logger().log_packet(mock_packet, mock_packet)
 
         out, err = capsys.readouterr()
         assert out == expected_packet

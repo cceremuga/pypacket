@@ -3,6 +3,7 @@
 import time
 from pypacket.util.logger import Logger
 from pypacket.base.listener import Listener
+from pypacket.base.deserialization import Deserialization
 from pypacket.base.configuration import Configuration
 from pypacket.util.colors import Colors
 
@@ -20,8 +21,11 @@ log_handler = Logger()
 # Initialize configuration.
 runtime_configuration = Configuration()
 
+# Initialize deserialization.
+deserializer = Deserialization()
+
 # The main runner.
-pypacket_runtime = Listener(log_handler, runtime_configuration)
+pypacket_runtime = Listener(log_handler, deserializer, runtime_configuration)
 
 # Handles Control+c interrupts, existing the main loop and threads.
 try:

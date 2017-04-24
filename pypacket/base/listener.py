@@ -24,20 +24,29 @@ class Listener:
         worker_thread: A separate thread handling all subprocesses.
     """
 
-    def __init__(self, log_handler, config):
+    def __init__(self, log_handler, deserializer, config):
         """Initializes the instance of Listener and starts listening."""
         self.config = config
         self.log_handler = log_handler
+        self.deserializer = deserializer
         self.sub_processes = {}
-        self.start()
+        self.__start()
         self.is_running = True
-        self.worker_thread = threading.Thread(target=self.multimon_worker)
+        self.worker_thread = threading.Thread(target=self.__multimon_worker)
         self.worker_thread.setDaemon(True)
         self.worker_thread.start()
 
-    def start(self):
+    def stop(self):
+        """Stops the listener subprocesses, performs a system exit."""
+        self.sub_processes['rtl'].terminate()
+        self.sub_processes['multimon'].terminate()
+        self.log_handler.log_info('Interrupt received, exiting.')
+        sys.exit(0)
+
+    def __start(self):
         """Starts the listener, decoder subproesses."""
-        self.log_handler.log_info('Starting rtl_fm subprocess.')
+        self.log_handler.log_info('Starting rtl_fm subprocess, listening on ' + \
+            self.config.frequency() + '.')
 
         # Start rtl_fm subprocess which listens for APRS signals.
         rtl_subprocess = subprocess.Popen(
@@ -59,23 +68,18 @@ class Listener:
 
         self.sub_processes['multimon'] = multimon_subprocess
 
-    def stop(self):
-        """Stops the listener subprocesses, performs a system exit."""
-        self.sub_processes['rtl'].terminate()
-        self.sub_processes['multimon'].terminate()
-        self.log_handler.log_info('Interrupt received, exiting.')
-        sys.exit(0)
-
-    def process_decoded_packet(self, decoded_packet):
+    def __process_decoded_packet(self, decoded_packet):
         """Parses the decoded packet, logging the raw data to file
         and the user friendly, readavle data to console.
 
         Args:
             decoded_packet: The raw, decoded APRS packet string.
         """
-        self.log_handler.log_packet(decoded_packet)
+        print_friendly_packet = \
+            self.deserializer.to_readable_output(decoded_packet)
+        self.log_handler.log_packet(decoded_packet, print_friendly_packet)
 
-    def clean_decoded_packet(self, decoded_packet):
+    def __clean_decoded_packet(self, decoded_packet):
         """Multimon-ng returns a string which starts with 'APRS: '.
         Naturally, this is not a valid part of an APRS packet, so that is
         stripped off.
@@ -93,21 +97,21 @@ class Listener:
 
         return None
 
-    def multimon_worker(self):
+    def __multimon_worker(self):
         """A worker thread handling output from the radio subprocess, sending
         the output to the Multimon-ng subprocess to decode.
         """
-        self.log_handler.log_info('Worker thread starting, listening.')
+        self.log_handler.log_info('Worker thread starting.')
 
         while self.is_running:
             try:
                 decoded_packet = self.sub_processes['multimon'] \
                     .stdout.readline().decode('utf-8').strip()
 
-                cleaned_packet = self.clean_decoded_packet(decoded_packet)
+                cleaned_packet = self.__clean_decoded_packet(decoded_packet)
 
                 if cleaned_packet is not None:
-                    self.process_decoded_packet(cleaned_packet)
+                    self.__process_decoded_packet(cleaned_packet)
 
             except UnicodeDecodeError:
                 self.log_handler.log_warn('Unable to decode packet.')
