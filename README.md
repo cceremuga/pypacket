@@ -29,7 +29,7 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
-* XX/XX/XXXX (v2.0)
+* 4/24/2017 (v2.0)
     * APRS frame deserialization (see requirements for new dependencies).
     * Code fully documented.
     * Main utilities unit tested. Listener class still forthcoming.
@@ -41,9 +41,6 @@ Logged packets will be output to your terminal and written to a file in the `log
     * Resolved bug when logs directory did not exist.
 * 4/17/2017 (v0.9)
     * Logging runtime activities to file in the logs subdirectory.
-* 4/2/2017 (v0.8)
-    * Start of unit tests.
-    * Travis CI integration.
 
 ## Feature Roadmap
 
