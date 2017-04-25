@@ -14,7 +14,7 @@ The following are required to be installed and configured on your system.
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
 * [pip](https://pypi.python.org/pypi/pip)
-* [aprslib] (https://pypi.python.org/pypi/aprslib)
+* [aprslib](https://pypi.python.org/pypi/aprslib)
 * [pytest](https://docs.pytest.org/en/latest/) (if you want to run tests)
 
 ## Configuration
@@ -29,6 +29,8 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
+* 4/25/2017 (v2.1)
+    * Refactoring, optimization.
 * 4/24/2017 (v2.0)
     * APRS frame deserialization (see requirements for new dependencies).
     * Code fully documented.
@@ -39,11 +41,10 @@ Logged packets will be output to your terminal and written to a file in the `log
     * Completed JSON configuration support.
     * Improved logging.
     * Resolved bug when logs directory did not exist.
-* 4/17/2017 (v0.9)
-    * Logging runtime activities to file in the logs subdirectory.
 
 ## Feature Roadmap
 
+* Pluggable listener, decoder framework [v3.0].
 * Simple TCP server (for use in Xastir etc.) [v3.0].
 * Custom IGate uploading [v4.0].
 * Support for other capture methods [unknown].
@@ -56,7 +57,4 @@ Feature / enhancement requests may be submitted via GitHub issues.
 
 ## Credits
 
-Thanks to the following projects / libraries for open source code / inspiration / Creative Commons resources.
-
-* [pimultimonaprs](https://github.com/asdil12/pymultimonaprs)
-* [The Noun Project](https://thenounproject.com/search/?q=radio%20tower&i=749293)
+The radio tower icon found in the logo courtesy of [The Noun Project](https://thenounproject.com/search/?q=radio%20tower&i=749293).

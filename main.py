@@ -2,7 +2,7 @@
 
 import time
 from pypacket.util.logger import Logger
-from pypacket.base.listener import Listener
+from pypacket.base.receiver import Receiver
 from pypacket.base.deserialization import Deserialization
 from pypacket.base.configuration import Configuration
 from pypacket.util.colors import Colors
@@ -25,11 +25,12 @@ runtime_configuration = Configuration()
 deserializer = Deserialization()
 
 # The main runner.
-pypacket_runtime = Listener(log_handler, deserializer, runtime_configuration)
+pypacket_receiver = Receiver(log_handler, deserializer, runtime_configuration)
+pypacket_receiver.start()
 
 # Handles Control+c interrupts, existing the main loop and threads.
 try:
     while True:
         time.sleep(.05)
 except KeyboardInterrupt:
-    pypacket_runtime.stop()
+    pypacket_receiver.stop()
