@@ -24,3 +24,17 @@ class TestConfiguration:
         actual_gain = test_configuration.gain()
 
         assert actual_gain == expected_gain
+
+    def test_listener_expect_listener(self):
+        test_configuration = Configuration()
+
+        actual_listener = test_configuration.listener()
+
+        assert actual_listener is not None
+
+    def test_decoder_expect_decoder(self):
+        test_configuration = Configuration()
+
+        actual_decoder = test_configuration.decoder()
+
+        assert actual_decoder is not None

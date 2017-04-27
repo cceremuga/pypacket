@@ -1,7 +1,12 @@
 {
-    "rtl": {
+    "listener": {
+        "module": "pypacket.base.rtl_listener",
+        "class": "RtlListener",
         "frequency": "144390000",
         "gain": "49.6",
         "sample_rate": "22050"
+    }, "decoder": {
+        "module": "pypacket.base.multimon_decoder",
+        "class": "MultimonDecoder"
     }
 }

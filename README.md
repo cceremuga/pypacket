@@ -29,6 +29,8 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
+* 4/27/2017 (v2.2)
+    * Listener, decoder now dynamically instantiated from JSON config.
 * 4/25/2017 (v2.1)
     * Refactoring, optimization.
 * 4/24/2017 (v2.0)
@@ -36,11 +38,6 @@ Logged packets will be output to your terminal and written to a file in the `log
     * Code fully documented.
     * Main utilities unit tested. Listener class still forthcoming.
     * Code cleanup, refactoring, optimization.
-* 4/18/2017 (v1.0)
-    * Improved RTL settings.
-    * Completed JSON configuration support.
-    * Improved logging.
-    * Resolved bug when logs directory did not exist.
 
 ## Feature Roadmap
 

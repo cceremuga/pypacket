@@ -3,8 +3,6 @@ import subprocess
 import re
 import sys
 from pypacket.util.logger import Logger
-from pypacket.base.rtl_listener import RtlListener
-from pypacket.base.multimon_decoder import MultimonDecoder
 
 class Receiver:
     """This is the main receiver class for PyPacket. It spawns two subprocesses
@@ -39,11 +37,11 @@ class Receiver:
 
     def start(self):
         """Starts the listener, decoder subproesses. Starts a worker thread."""
-        listener = RtlListener()
+        listener = self.config.listener()
         self.subprocesses['listener'] = \
             listener.load(self.config, self.log_handler)
 
-        decoder = MultimonDecoder()
+        decoder = self.config.decoder()
         self.subprocesses['decoder'] = \
             decoder.load(self.config, self.log_handler, self.subprocesses['listener'])
 

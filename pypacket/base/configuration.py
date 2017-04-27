@@ -1,4 +1,5 @@
 import json
+import importlib
 
 class Configuration:
     """Loads in JSON configuration from file, providing various methods to
@@ -16,16 +17,28 @@ class Configuration:
         self.__load()
 
     def frequency(self):
-        """Gets the configured RTL frequency setting."""
-        return self.data['rtl']['frequency']
+        """Gets the configured listener frequency setting."""
+        return self.data['listener']['frequency']
 
     def gain(self):
-        """Gets the configured RTL gain setting."""
-        return self.data['rtl']['gain']
+        """Gets the configured listener gain setting."""
+        return self.data['listener']['gain']
 
     def sample_rate(self):
-        """Gets the configured RTL sample rate setting."""
-        return self.data['rtl']['sample_rate']
+        """Gets the configured listener sample rate setting."""
+        return self.data['listener']['sample_rate']
+
+    def listener(self):
+        """Gets the configured, instantiated listener class."""
+        module = importlib.import_module(self.data['listener']['module'])
+        class_ = getattr(module, self.data['listener']['class'])
+        return class_()
+
+    def decoder(self):
+        """Gets the configured, instantiated decoder class."""
+        module = importlib.import_module(self.data['decoder']['module'])
+        class_ = getattr(module, self.data['decoder']['class'])
+        return class_()
 
     def __load(self):
         """Loads in JSON data from the config file, assigning to data."""
