@@ -1,2 +1,4 @@
 aprslib
 pytest
+pytest-cov
+coveralls
