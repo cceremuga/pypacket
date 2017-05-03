@@ -1,6 +1,6 @@
 <p align="center"><img src="https://i.imgur.com/MZYHAFG.png" /></p>
 
-A simple CLI tool to receive, decode, log [APRS](http://www.aprs.org/) packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source expirimental tool for research into the RF spectrum and APRS.
+A simple CLI tool to receive, decode, log [APRS](http://www.aprs.org/) packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source experimental tool for research into the RF spectrum and APRS.
 
 [![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket) [![Coverage Status](https://coveralls.io/repos/github/cceremuga/pypacket/badge.svg?branch=master)](https://coveralls.io/github/cceremuga/pypacket?branch=master)
 
@@ -29,21 +29,18 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
+* 5/3/2017 (v2.3)
+    * Integrated code coverage reports, boosted tests.
 * 4/27/2017 (v2.2)
     * Listener, decoder now dynamically instantiated from JSON config.
 * 4/25/2017 (v2.1)
     * Refactoring, optimization.
-* 4/24/2017 (v2.0)
-    * APRS frame deserialization (see requirements for new dependencies).
-    * Code fully documented.
-    * Main utilities unit tested. Listener class still forthcoming.
-    * Code cleanup, refactoring, optimization.
 
 ## Feature Roadmap
 
 * Pluggable listener, decoder framework [v3.0].
-* Simple TCP server (for use in Xastir etc.) [v3.0].
-* Custom IGate uploading [v4.0].
+* Custom IGate uploading [v3.0].
+* Simple TCP server (for use in Xastir etc.) [v4.0].
 * Support for other capture methods [unknown].
 
 ## Contributing
