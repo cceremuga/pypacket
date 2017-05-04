@@ -1,3 +1,5 @@
+import subprocess
+import mock
 from pypacket.base.receiver import Receiver
 from pypacket.util.logger import Logger
 from pypacket.base.deserialization import Deserialization
@@ -17,19 +19,6 @@ class TestReceiver:
         assert test_receiver.log_handler == log_handler
         assert test_receiver.deserializer == deserializer
         assert test_receiver.config == runtime_configuration
-
-    def test_stop_expect_running(self):
-        log_handler = Logger()
-        runtime_configuration = Configuration()
-        deserializer = Deserialization()
-
-        test_receiver = \
-            Receiver(log_handler, deserializer, runtime_configuration)
-
-        test_receiver.start()
-
-        assert test_receiver.is_running == True
-        assert len(test_receiver.subprocesses) == 2
 
     def test_stop_expect_sys_exit(self):
         log_handler = Logger()
