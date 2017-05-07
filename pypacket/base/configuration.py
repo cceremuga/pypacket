@@ -40,6 +40,10 @@ class Configuration:
         class_ = getattr(module, self.data['decoder']['class'])
         return class_()
 
+    def load_json(self, json_data):
+        """Loads in JSON data from a String, assigning to data."""
+        self.data = json.loads(json_data)
+
     def __load(self):
         """Loads in JSON data from the config file, assigning to data."""
         with open(self.CONFIG_FILE_NAME) as json_data_file:

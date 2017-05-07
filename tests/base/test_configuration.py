@@ -38,3 +38,12 @@ class TestConfiguration:
         actual_decoder = test_configuration.decoder()
 
         assert actual_decoder is not None
+
+    def test_constructor_with_json_expect_constructed(self):
+        mock_json = '{"listener":{"gain":"0"}}'
+        test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
+
+        actual_gain = test_configuration.gain()
+
+        assert actual_gain == '0'
