@@ -1,5 +1,6 @@
 from pypacket.base.configuration import Configuration
 
+
 class TestConfiguration:
     def test_frequency_expect_frequency(self):
         test_configuration = Configuration()

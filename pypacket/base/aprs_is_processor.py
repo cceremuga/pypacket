@@ -1,6 +1,7 @@
 from pypacket.base.processor import ProcessorBase
 from threading import Timer
 import aprslib
+import os
 
 
 class AprsIsProcessor(ProcessorBase):
@@ -9,6 +10,7 @@ class AprsIsProcessor(ProcessorBase):
         self.packets = []
         self.thread = Timer(60, self.__timer_handle)
         self.log_handler = None
+        self.config = None
 
     def load(self, config, log_handler):
         """Starts a threaded timer for handling packets in bulk once per minute.
@@ -17,6 +19,7 @@ class AprsIsProcessor(ProcessorBase):
             config: The related app configuration.
             log_handler: The log handler for the app.
         """
+        self.config = config
         self.log_handler = log_handler
         log_handler.log_info('Starting IGate processor.')
         self.thread.start()
@@ -42,7 +45,7 @@ class AprsIsProcessor(ProcessorBase):
     def __send_packets(self):
         self.log_handler.log_info('Connecting to APR-IS.')
 
-        is_client = aprslib.IS('KD2NSP', passwd='22968', port=14580)
+        is_client = aprslib.IS(self.__get_username(), passwd=self.__get_password(), port=14580)
         is_client.connect()
 
         self.log_handler.log_info('Sending {0} packet(s) to APRS-IS.'.format(len(self.packets)))
@@ -51,3 +54,9 @@ class AprsIsProcessor(ProcessorBase):
             is_client.sendall(packet)
 
         self.log_handler.log_info('APRS-IS upload complete.')
+
+    def __get_username(self):
+        return os.environ.get('PYPACKET_USERNAME', 'setme')
+
+    def __get_password(self):
+        return os.environ.get('PYPACKET_PASSWORD', 'setme')

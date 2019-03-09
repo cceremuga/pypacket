@@ -29,7 +29,7 @@ class Receiver:
     def __init__(self, log_handler, deserializer, config):
         """Initializes the instance of Listener and starts listening."""
         self.is_running = False
-        self.subprocesses = {}
+        self.sub_processes = {}
         self.log_handler = log_handler
         self.deserializer = deserializer
         self.config = config
@@ -39,12 +39,12 @@ class Receiver:
     def start(self):
         """Starts the listener, decoder sub-processes, processor. Starts a worker thread."""
         listener = self.config.listener()
-        self.subprocesses['listener'] = \
+        self.sub_processes['listener'] = \
             listener.load(self.config, self.log_handler)
 
         decoder = self.config.decoder()
-        self.subprocesses['decoder'] = \
-            decoder.load(self.config, self.log_handler, self.subprocesses['listener'])
+        self.sub_processes['decoder'] = \
+            decoder.load(self.config, self.log_handler, self.sub_processes['listener'])
 
         self.processor = self.config.processor()
         self.processor.load(self.config, self.log_handler)
@@ -57,8 +57,8 @@ class Receiver:
 
     def stop(self):
         """Stops all sub-processes, performs a system exit."""
-        for key in self.subprocesses:
-            self.subprocesses[key].terminate()
+        for key in self.sub_processes:
+            self.sub_processes[key].terminate()
 
         self.log_handler.log_info('Interrupt received, exiting.')
 
@@ -101,7 +101,7 @@ class Receiver:
 
         while self.is_running:
             try:
-                decoded_packet = self.subprocesses['decoder'] \
+                decoded_packet = self.sub_processes['decoder'] \
                     .stdout.readline().decode('utf-8').strip()
 
                 cleaned_packet = self.__clean_decoded_packet(decoded_packet)

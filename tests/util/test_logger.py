@@ -1,6 +1,7 @@
 from pypacket.util.logger import Logger
 from pypacket.util.colors import Colors
 
+
 class TestLogger:
     PRINT_SUFFIX = '\n'
 

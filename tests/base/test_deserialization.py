@@ -1,6 +1,7 @@
 from pypacket.base.deserialization import Deserialization
 from pypacket.util.colors import Colors
 
+
 class TestDeserialization:
     def test_to_readable_output_nonsense_packet_expect_raw_returned(self):
         test_deserialization = Deserialization()
