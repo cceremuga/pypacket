@@ -4,13 +4,13 @@ import sys
 
 
 class Receiver:
-    """This is the main receiver class for PyPacket. It spawns two subprocesses
+    """This is the main receiver class for PyPacket. It spawns two sub-processes
     in a separate thread.
 
-    The first subprocess is the listener which listens on the configured
-    frequency, sending all raw output to the second subprocess.
+    The first sub-process is the listener which listens on the configured
+    frequency, sending all raw output to the second sub-process.
 
-    The second subprocess is the decoder process. Once a received packet
+    The second sub-process is the decoder process. Once a received packet
     has been decoded, it is cleaned up, leaving the raw APRS String.
 
     The string is then logged to file and output to the CLI for easy reading.
@@ -33,6 +33,8 @@ class Receiver:
         self.log_handler = log_handler
         self.deserializer = deserializer
         self.config = config
+        self.worker_thread = None
+        self.processor = None
 
     def start(self):
         """Starts the listener, decoder sub-processes, processor. Starts a worker thread."""
@@ -47,7 +49,7 @@ class Receiver:
         self.processor = self.config.processor()
         self.processor.load(self.config, self.log_handler)
 
-        # Throw the subprocesses into a worker thread.
+        # Throw the sub-processes into a worker thread.
         self.is_running = True
         self.worker_thread = threading.Thread(target=self.__decoder_worker)
         self.worker_thread.setDaemon(True)
@@ -94,7 +96,7 @@ class Receiver:
         return None
 
     def __decoder_worker(self):
-        """A worker thread handling output from the decoder subprocess."""
+        """A worker thread handling output from the decoder sub-process."""
         self.log_handler.log_info('Worker thread starting.')
 
         while self.is_running:

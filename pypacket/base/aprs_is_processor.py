@@ -1,5 +1,6 @@
 from pypacket.base.processor import ProcessorBase
 from threading import Timer
+import aprslib
 
 
 class AprsIsProcessor(ProcessorBase):
@@ -17,7 +18,7 @@ class AprsIsProcessor(ProcessorBase):
             log_handler: The log handler for the app.
         """
         self.log_handler = log_handler
-        log_handler.log_info('Starting processor.')
+        log_handler.log_info('Starting IGate processor.')
         self.thread.start()
 
     def handle(self, packet):
@@ -30,7 +31,7 @@ class AprsIsProcessor(ProcessorBase):
 
     def __timer_handle(self):
         if not self.packets:
-            self.log_handler.log_info('No packets to send to iGate.')
+            self.log_handler.log_info('No packets to send to APRS-IS.')
         else:
             self.__send_packets()
 
@@ -39,9 +40,14 @@ class AprsIsProcessor(ProcessorBase):
         self.thread.start()
 
     def __send_packets(self):
-        self.log_handler.log_info('Sending {0} packet(s) to iGate.'.format(len(self.packets)))
+        self.log_handler.log_info('Connecting to APR-IS.')
+
+        is_client = aprslib.IS('KD2NSP', passwd='22968', port=14580)
+        is_client.connect()
+
+        self.log_handler.log_info('Sending {0} packet(s) to APRS-IS.'.format(len(self.packets)))
 
         for packet in self.packets:
-            self.log_handler.log_info(packet)
+            is_client.sendall(packet)
 
-        self.log_handler.log_info('iGate upload complete.')
+        self.log_handler.log_info('APRS-IS upload complete.')
