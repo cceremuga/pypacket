@@ -44,9 +44,8 @@ class Receiver:
         self.subprocesses['decoder'] = \
             decoder.load(self.config, self.log_handler, self.subprocesses['listener'])
 
-        processor = self.config.processor()
-        self.subprocesses['processor'] = \
-            processor.load(self.config, self.log_handler, self.subprocesses['decoder'])
+        self.processor = self.config.processor()
+        self.processor.load(self.config, self.log_handler)
 
         # Throw the subprocesses into a worker thread.
         self.is_running = True
@@ -65,7 +64,8 @@ class Receiver:
 
     def __process_decoded_packet(self, decoded_packet):
         """Parses the decoded packet, logging the raw data to file
-        and the user friendly, readavle data to console.
+        and the user friendly, readable data to console. Passes along
+        to the configured processor.
 
         Args:
             decoded_packet: The raw, decoded APRS packet string.
@@ -73,6 +73,7 @@ class Receiver:
         print_friendly_packet = \
             self.deserializer.to_readable_output(decoded_packet)
         self.log_handler.log_packet(decoded_packet, print_friendly_packet)
+        self.processor.handle(decoded_packet)
 
     def __clean_decoded_packet(self, decoded_packet):
         """Multimon-ng returns a string which starts with 'APRS: '.
