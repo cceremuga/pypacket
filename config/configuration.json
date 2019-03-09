@@ -8,5 +8,8 @@
     }, "decoder": {
         "module": "pypacket.base.multimon_decoder",
         "class": "MultimonDecoder"
+    }, "processor": {
+        "module": "pypacket.base.aprs_is_processor",
+        "class": "AprsIsProcessor"
     }
 }

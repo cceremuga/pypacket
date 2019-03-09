@@ -1,6 +1,7 @@
 import json
 import importlib
 
+
 class Configuration:
     """Loads in JSON configuration from file, providing various methods to
     access individual configuration data pieces.
@@ -38,6 +39,12 @@ class Configuration:
         """Gets the configured, instantiated decoder class."""
         module = importlib.import_module(self.data['decoder']['module'])
         class_ = getattr(module, self.data['decoder']['class'])
+        return class_()
+
+    def processor(self):
+        """Gets the configured, instantiated processor class."""
+        module = importlib.import_module(self.data['processor']['module'])
+        class_ = getattr(module, self.data['processor']['class'])
         return class_()
 
     def load_json(self, json_data):

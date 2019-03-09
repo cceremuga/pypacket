@@ -1,6 +1,7 @@
 import subprocess
 from pypacket.base.decoder import DecoderBase
 
+
 class MultimonDecoder(DecoderBase):
     def load(self, config, log_handler, listener_subprocess):
         log_handler.log_info('Starting decoder subprocess.')

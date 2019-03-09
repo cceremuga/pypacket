@@ -1,8 +1,7 @@
 import threading
-import subprocess
 import re
 import sys
-from pypacket.util.logger import Logger
+
 
 class Receiver:
     """This is the main receiver class for PyPacket. It spawns two subprocesses
@@ -22,9 +21,9 @@ class Receiver:
     Attributes:
         config: The instance of Configuration containing all runtime options.
         log_handler: The instance of Logger containing all logging operations.
-        subprocesses: A collection of subprocesses, initialized in start().
+        sub-processes: A collection of sub-processes, initialized in start().
         is_running: Indicates whether or not the listener is running.
-        worker_thread: A separate thread handling all subprocesses.
+        worker_thread: A separate thread handling all sub-processes.
     """
 
     def __init__(self, log_handler, deserializer, config):
@@ -36,7 +35,7 @@ class Receiver:
         self.config = config
 
     def start(self):
-        """Starts the listener, decoder subproesses. Starts a worker thread."""
+        """Starts the listener, decoder sub-processes, processor. Starts a worker thread."""
         listener = self.config.listener()
         self.subprocesses['listener'] = \
             listener.load(self.config, self.log_handler)
@@ -45,6 +44,10 @@ class Receiver:
         self.subprocesses['decoder'] = \
             decoder.load(self.config, self.log_handler, self.subprocesses['listener'])
 
+        processor = self.config.processor()
+        self.subprocesses['processor'] = \
+            processor.load(self.config, self.log_handler, self.subprocesses['decoder'])
+
         # Throw the subprocesses into a worker thread.
         self.is_running = True
         self.worker_thread = threading.Thread(target=self.__decoder_worker)
@@ -52,7 +55,7 @@ class Receiver:
         self.worker_thread.start()
 
     def stop(self):
-        """Stops all subprocesses, performs a system exit."""
+        """Stops all sub-processes, performs a system exit."""
         for key in self.subprocesses:
             self.subprocesses[key].terminate()
 

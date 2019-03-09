@@ -90,3 +90,6 @@ ENV/
 
 # Logs
 logs/
+
+# IDE
+.idea/
