@@ -2,15 +2,17 @@
 
 A simple CLI tool to receive, decode, log [APRS](http://www.aprs.org/) packets via rtl_fm ([RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr)) and [multimon-ng](https://github.com/EliasOenal/multimon-ng). This project serves as an open source experimental tool for research into the RF spectrum and APRS.
 
+Be warned, I probably over-engineered this quite extensively. Why? Well, it's a free-time project so I can do that with no loss but my own time. It's an outlet for perfectionism and Python learning.
+
 [![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket) [![Coverage Status](https://coveralls.io/repos/github/cceremuga/pypacket/badge.svg?branch=master)](https://coveralls.io/github/cceremuga/pypacket?branch=master)
 
 ## Requirements
 
 The following are required to be installed and configured on your system.
 
-* Some form of Linux flavor. MacOS, possibly. Windows, doubtful.
+* Some form of Linux flavor. I build it on Manjaro. I run it 24/7 on a Raspberry Pi w/ Raspbian.
 * An RTL-SDR compatible device.
-* Python >= v3.5
+* Python >= v3.7
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
 * [pip](https://pypi.python.org/pypi/pip)
@@ -29,19 +31,16 @@ Logged packets will be output to your terminal and written to a file in the `log
 
 ## Recent Patch Notes
 
+* 3/9/2019 (v3.0)
+    * From beyond the code grave comes 3.0 with pluggable config for all modules, once-a-minute uploads to APRS-IS.
 * 5/3/2017 (v2.3)
     * Integrated code coverage reports, boosted tests.
 * 4/27/2017 (v2.2)
     * Listener, decoder now dynamically instantiated from JSON config.
-* 4/25/2017 (v2.1)
-    * Refactoring, optimization.
 
-## Feature Roadmap
+## Feature Road Map
 
-* Pluggable listener, decoder framework [v3.0].
-* Custom IGate uploading [v3.0].
-* Simple TCP server (for use in Xastir etc.) [v4.0].
-* Support for other capture methods [unknown].
+* None planned really. We'll see how this evolves as I run this more regularly.
 
 ## Contributing
 

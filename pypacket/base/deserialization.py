@@ -31,7 +31,7 @@ class Deserialization:
                 self.__get_formatted(packet, 'comment') + \
                 self.__get_formatted(packet, 'text')
         except (aprslib.ParseError, aprslib.UnknownFormat) as exp:
-            return serialized_packet
+            return 'Could not deserialize: {0}'.format(serialized_packet)
 
     def __get_formatted(self, deserialized_packet, key):
         if key not in deserialized_packet:
