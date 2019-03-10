@@ -93,3 +93,6 @@ logs/
 
 # IDE
 .idea/
+
+# Runtime script
+run.sh
