@@ -47,10 +47,6 @@ class Configuration:
         class_ = getattr(module, self.data['processor']['class'])
         return class_()
 
-    def how_often_to_process(self):
-        """Gets the configured processor how_often_to_process."""
-        return self.data['processor']['how_often_to_process']
-
     def host(self):
         """Gets the configured processor host."""
         return self.data['processor']['host']
