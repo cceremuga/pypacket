@@ -32,7 +32,8 @@ class AprsIsProcessor(ProcessorBase):
 
         username = self.__get_username()
         password = self.__get_password()
-        self.is_client = aprslib.IS(username, passwd=password, port=14580)
+        host = self.config.host()
+        self.is_client = aprslib.IS(username, passwd=password, host=host, port=14580)
 
         try:
             self.__is_connect()

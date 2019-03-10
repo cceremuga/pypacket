@@ -11,6 +11,7 @@
     }, "processor": {
         "module": "pypacket.base.aprs_is_processor",
         "class": "AprsIsProcessor",
-        "how_often_to_process": 5
+        "how_often_to_process": 5,
+        "host": "second.aprs.net"
     }
 }
