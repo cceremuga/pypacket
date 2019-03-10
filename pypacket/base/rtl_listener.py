@@ -1,6 +1,7 @@
 import subprocess
 from pypacket.base.listener import ListenerBase
 
+
 class RtlListener(ListenerBase):
     def load(self, config, log_handler):
         log_handler.log_info('Starting listener subprocess, listening on ' + \

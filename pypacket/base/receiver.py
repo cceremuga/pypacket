@@ -1,17 +1,16 @@
 import threading
-import subprocess
 import re
 import sys
-from pypacket.util.logger import Logger
+
 
 class Receiver:
-    """This is the main receiver class for PyPacket. It spawns two subprocesses
+    """This is the main receiver class for PyPacket. It spawns two sub-processes
     in a separate thread.
 
-    The first subprocess is the listener which listens on the configured
-    frequency, sending all raw output to the second subprocess.
+    The first sub-process is the listener which listens on the configured
+    frequency, sending all raw output to the second sub-process.
 
-    The second subprocess is the decoder process. Once a received packet
+    The second sub-process is the decoder process. Once a received packet
     has been decoded, it is cleaned up, leaving the raw APRS String.
 
     The string is then logged to file and output to the CLI for easy reading.
@@ -22,39 +21,44 @@ class Receiver:
     Attributes:
         config: The instance of Configuration containing all runtime options.
         log_handler: The instance of Logger containing all logging operations.
-        subprocesses: A collection of subprocesses, initialized in start().
+        sub-processes: A collection of sub-processes, initialized in start().
         is_running: Indicates whether or not the listener is running.
-        worker_thread: A separate thread handling all subprocesses.
+        worker_thread: A separate thread handling all sub-processes.
     """
 
     def __init__(self, log_handler, deserializer, config):
         """Initializes the instance of Listener and starts listening."""
         self.is_running = False
-        self.subprocesses = {}
+        self.sub_processes = {}
         self.log_handler = log_handler
         self.deserializer = deserializer
         self.config = config
+        self.worker_thread = None
+        self.processor = None
 
     def start(self):
-        """Starts the listener, decoder subproesses. Starts a worker thread."""
+        """Starts the listener, decoder sub-processes, processor. Starts a worker thread."""
         listener = self.config.listener()
-        self.subprocesses['listener'] = \
+        self.sub_processes['listener'] = \
             listener.load(self.config, self.log_handler)
 
         decoder = self.config.decoder()
-        self.subprocesses['decoder'] = \
-            decoder.load(self.config, self.log_handler, self.subprocesses['listener'])
+        self.sub_processes['decoder'] = \
+            decoder.load(self.config, self.log_handler, self.sub_processes['listener'])
 
-        # Throw the subprocesses into a worker thread.
+        self.processor = self.config.processor()
+        self.processor.load(self.config, self.log_handler)
+
+        # Throw the sub-processes into a worker thread.
         self.is_running = True
         self.worker_thread = threading.Thread(target=self.__decoder_worker)
         self.worker_thread.setDaemon(True)
         self.worker_thread.start()
 
     def stop(self):
-        """Stops all subprocesses, performs a system exit."""
-        for key in self.subprocesses:
-            self.subprocesses[key].terminate()
+        """Stops all sub-processes, performs a system exit."""
+        for key in self.sub_processes:
+            self.sub_processes[key].terminate()
 
         self.log_handler.log_info('Interrupt received, exiting.')
 
@@ -62,7 +66,8 @@ class Receiver:
 
     def __process_decoded_packet(self, decoded_packet):
         """Parses the decoded packet, logging the raw data to file
-        and the user friendly, readavle data to console.
+        and the user friendly, readable data to console. Passes along
+        to the configured processor.
 
         Args:
             decoded_packet: The raw, decoded APRS packet string.
@@ -70,6 +75,7 @@ class Receiver:
         print_friendly_packet = \
             self.deserializer.to_readable_output(decoded_packet)
         self.log_handler.log_packet(decoded_packet, print_friendly_packet)
+        self.processor.handle(decoded_packet)
 
     def __clean_decoded_packet(self, decoded_packet):
         """Multimon-ng returns a string which starts with 'APRS: '.
@@ -90,12 +96,12 @@ class Receiver:
         return None
 
     def __decoder_worker(self):
-        """A worker thread handling output from the decoder subprocess."""
+        """A worker thread handling output from the decoder sub-process."""
         self.log_handler.log_info('Worker thread starting.')
 
         while self.is_running:
             try:
-                decoded_packet = self.subprocesses['decoder'] \
+                decoded_packet = self.sub_processes['decoder'] \
                     .stdout.readline().decode('utf-8').strip()
 
                 cleaned_packet = self.__clean_decoded_packet(decoded_packet)

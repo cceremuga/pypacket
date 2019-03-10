@@ -1,9 +1,8 @@
-import subprocess
-import mock
 from pypacket.base.receiver import Receiver
 from pypacket.util.logger import Logger
 from pypacket.base.deserialization import Deserialization
 from pypacket.base.configuration import Configuration
+
 
 class TestReceiver:
     def test_init_expect_initialized(self):
@@ -15,7 +14,7 @@ class TestReceiver:
             Receiver(log_handler, deserializer, runtime_configuration)
 
         assert test_receiver.is_running == False
-        assert test_receiver.subprocesses == {}
+        assert test_receiver.sub_processes == {}
         assert test_receiver.log_handler == log_handler
         assert test_receiver.deserializer == deserializer
         assert test_receiver.config == runtime_configuration
@@ -67,7 +66,8 @@ class TestReceiver:
     def test_start_with_mock_instances_expect_started(self):
         mock_json = '{"listener":{"module": "pypacket.base.mock_listener",' + \
             '"class": "MockListener"},"decoder":{"module": ' + \
-            '"pypacket.base.mock_decoder","class": "MockDecoder"}}'
+            '"pypacket.base.mock_decoder","class": "MockDecoder"}, ' + \
+            '"processor": {"module": "pypacket.base.mock_processor", "class": "MockProcessor"}}'
         log_handler = Logger()
         runtime_configuration = Configuration()
         runtime_configuration.load_json(mock_json)

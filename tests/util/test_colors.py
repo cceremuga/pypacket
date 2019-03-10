@@ -1,5 +1,6 @@
 from pypacket.util.colors import Colors
 
+
 class TestColors:
     def test_green_expect_green_value(self):
         expected_color = '\033[92m'

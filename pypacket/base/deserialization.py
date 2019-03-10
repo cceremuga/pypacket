@@ -1,6 +1,7 @@
 import aprslib
 from pypacket.util.colors import Colors
 
+
 class Deserialization:
     """This handles deserialization of APRS packet data into a format which
     is much more easy to consume for humans.

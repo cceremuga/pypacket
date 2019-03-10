@@ -3,6 +3,7 @@ import os
 from time import localtime, strftime
 from pypacket.util.colors import Colors
 
+
 class Logger:
     """A utility logger class for purposes of logging things to console as
     well as to file via the Python logging utility.
@@ -18,54 +19,54 @@ class Logger:
         """Sets up the logger, via calling setup()."""
         self.__setup()
 
-    def log_info(self, logMessage):
+    def log_info(self, log_message):
         """Logs an info message to console, file.
 
         Args:
-            logMessage: The string message to log.
+            log_message: The string message to log.
         """
-        self.__log_any(Colors.BLUE, self.SYS_PREFIX, logMessage)
-        logging.info(logMessage)
+        self.__log_any(Colors.BLUE, self.SYS_PREFIX, log_message)
+        logging.info(log_message)
 
-    def log_error(self, logMessage):
+    def log_error(self, log_message):
         """Logs an error message to console, file.
 
         Args:
-            logMessage: The string message to log.
+            log_message: The string message to log.
         """
-        self.__log_any(Colors.RED, self.ERR_PREFIX, logMessage)
-        logging.error(logMessage)
+        self.__log_any(Colors.RED, self.ERR_PREFIX, log_message)
+        logging.error(log_message)
 
-    def log_warn(self, logMessage):
+    def log_warn(self, log_message):
         """Logs a warning message to console, file.
 
         Args:
-            logMessage: The string message to log.
+            log_message: The string message to log.
         """
-        self.__log_any(Colors.YELLOW, self.WRN_PREFIX, logMessage)
-        logging.warning(logMessage)
+        self.__log_any(Colors.YELLOW, self.WRN_PREFIX, log_message)
+        logging.warning(log_message)
 
-    def log_packet(self, rawMessage, friendlyMessage):
+    def log_packet(self, raw_message, friendly_message):
         """Logs a raw packet message to file, friendly to console.
         Intended to log raw, decoded APRS packets to file with a user-readable
         version to the CLI.
 
         Args:
-            rawMessage: The raw string message to log to file.
-            friendlyMessage: The user friendly message to log to CLI.
+            raw_message: The raw string message to log to file.
+            friendly_message: The user friendly message to log to CLI.
         """
-        self.__log_any(Colors.GREEN, self.REC_PREFIX, friendlyMessage)
-        logging.info(rawMessage)
+        self.__log_any(Colors.GREEN, self.REC_PREFIX, friendly_message)
+        logging.info(raw_message)
 
-    def __log_any(self, color, prefix, logMessage):
+    def __log_any(self, color, prefix, log_message):
         """Logs any message to system console.
 
         Args:
             color: The color escape sequence to use.
             prefix: A string prefix such as [INFO].
-            logMessage: The string message to log.
+            log_message: The string friendly_message to log.
         """
-        print(color + prefix + Colors.RESET + logMessage)
+        print(color + prefix + Colors.RESET + log_message)
 
     def __setup(self):
         """Sets up the logger. First checks to see if the log directory exists.
