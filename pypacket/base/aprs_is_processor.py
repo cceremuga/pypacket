@@ -1,5 +1,10 @@
 from pypacket.base.processor import ProcessorBase
 from threading import Timer
+from aprslib.exceptions import (
+    ConnectionDrop,
+    ConnectionError,
+    LoginError
+)
 import aprslib
 import os
 
@@ -25,9 +30,18 @@ class AprsIsProcessor(ProcessorBase):
         self.timer_seconds = self.config.how_often_to_process()
         self.log_handler = log_handler
 
-        self.log_handler.log_info('Connecting to APR-IS.')
-        self.is_client = aprslib.IS(self.__get_username(), passwd=self.__get_password(), port=14580)
-        self.__is_connect()
+        username = self.__get_username()
+        password = self.__get_password()
+        self.is_client = aprslib.IS(username, passwd=password, port=14580)
+
+        try:
+            self.__is_connect()
+        except LoginError:
+            self.log_handler.log_error('Unable to log into APRS-IS with the specified credentials, cannot upload.')
+            return
+        except ConnectionError:
+            self.log_handler.log_info('Unable to connect to APRS-IS.')
+            return
 
         log_handler.log_info('Starting IGate.')
         self.thread = Timer(self.timer_seconds, self.__timer_handle)
@@ -54,8 +68,15 @@ class AprsIsProcessor(ProcessorBase):
 
         self.log_handler.log_info('Uploading {0} packet(s) to APRS-IS.'.format(len(self.packets)))
 
-        for packet in self.packets:
-            self.is_client.sendall(packet)
+        try:
+            for packet in self.packets:
+                self.is_client.sendall(packet)
+        except ConnectionDrop:
+            self.__is_reconnect()
+            return
+        except ConnectionError:
+            self.__is_reconnect()
+            return
 
         self.log_handler.log_info('APRS-IS upload complete.')
 
@@ -65,5 +86,10 @@ class AprsIsProcessor(ProcessorBase):
     def __get_password(self):
         return os.environ.get('PYPACKET_PASSWORD', 'setme')
 
+    def __is_reconnect(self):
+        self.log_handler.log_warning('Disconnected from APRS-IS, attempting to reconnect.')
+        self.__is_connect()
+
     def __is_connect(self):
+        self.log_handler.log_info('Connecting to APR-IS.')
         self.is_client.connect()

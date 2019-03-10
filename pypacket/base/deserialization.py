@@ -22,7 +22,7 @@ class Deserialization:
         """
         try:
             packet = aprslib.parse(serialized_packet)
-            return self.__get_formatted(packet, 'from') + \
+            return self.__get_formatted(packet, 'from').replace(self.SPACING_PREFIX, '') + \
                 self.__get_formatted(packet, 'to') + \
                 self.__get_formatted(packet, 'format') + \
                 self.__get_formatted(packet, 'latitude') + \
