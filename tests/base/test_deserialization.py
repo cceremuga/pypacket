@@ -14,7 +14,7 @@ class TestDeserialization:
     def test_to_readable_output_reale_packet_expect_readable_returned(self):
         test_deserialization = Deserialization()
         test_packet = 'AAA123>BBB123,APRS-1*,WIDE1*,APRS-10*,WIDE2*:!4252.29NT07538.40W&PHG7130 Yes hello, testing.'
-        expected_return = self.__get_prefix('from:') + 'AAA123' + \
+        expected_return = self.__get_prefix('from:').replace('\r\n      ', '') + 'AAA123' + \
             self.__get_prefix('to:') + 'BBB123' + \
             self.__get_prefix('format:') + 'uncompressed' + \
             self.__get_prefix('latitude:') + '42.8715' + \

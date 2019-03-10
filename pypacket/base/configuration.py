@@ -51,6 +51,10 @@ class Configuration:
         """Gets the configured processor how_often_to_process."""
         return self.data['processor']['how_often_to_process']
 
+    def host(self):
+        """Gets the configured processor host."""
+        return self.data['processor']['host']
+
     def load_json(self, json_data):
         """Loads in JSON data from a String, assigning to data."""
         self.data = json.loads(json_data)
