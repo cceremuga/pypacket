@@ -37,6 +37,9 @@ In the directory you've cloned the repository:
 
 ## Patch Notes
 
+* 3/10/2019 (v3.1)
+    * Configurable upload time.
+    * Connect once at start to APRS-IS.
 * 3/9/2019 (v3.0)
     * From beyond the code-grave the zombie of PyPacket rises with version 3.0. It comes with a fully modular extension framework and once-per-minute uploads to APRS-IS.
 * 5/3/2017 (v2.3)

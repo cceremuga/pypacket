@@ -10,6 +10,7 @@
         "class": "MultimonDecoder"
     }, "processor": {
         "module": "pypacket.base.aprs_is_processor",
-        "class": "AprsIsProcessor"
+        "class": "AprsIsProcessor",
+        "how_often_to_process": 5
     }
 }

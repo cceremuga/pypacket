@@ -47,6 +47,10 @@ class Configuration:
         class_ = getattr(module, self.data['processor']['class'])
         return class_()
 
+    def how_often_to_process(self):
+        """Gets the configured processor how_often_to_process."""
+        return self.data['processor']['how_often_to_process']
+
     def load_json(self, json_data):
         """Loads in JSON data from a String, assigning to data."""
         self.data = json.loads(json_data)
