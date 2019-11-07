@@ -11,12 +11,11 @@ The following are required to be installed and configured on your system.
 * Some form of Linux flavor. I build it on Manjaro. I run it on a Raspberry Pi w/ Raspbian.
 * An RTL-SDR compatible device.
 * A call-sign login and password for APRS-IS.
-* Python >= v3.5
+* Python >= v3.6
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
 * [pip](https://pypi.python.org/pypi/pip)
-    * [aprslib](https://pypi.python.org/pypi/aprslib)
-    * [pytest](https://docs.pytest.org/en/latest/) (optional, only required if you want to run tests)
+    * `pip install -r requirements.txt`
 
 ## Configuration
 
