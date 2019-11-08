@@ -64,9 +64,9 @@ class TestReceiver:
         assert actual_packet == expected_cleaned_packet
 
     def test_start_with_mock_instances_expect_started(self):
-        mock_json = '{"listener":{"class": "pypacket.base.mock_listener.MockListener"},' + \
-            '"decoder":{"class": "pypacket.base.mock_decoder.MockDecoder"}, ' + \
-            '"processor": {"class": "pypacket.base.mock_processor.MockProcessor"}}'
+        mock_json = '{"listener":{"implementation": "pypacket.base.mock_listener.MockListener"},' + \
+            '"decoder":{"implementation": "pypacket.base.mock_decoder.MockDecoder"}, ' + \
+            '"processor": {"implementation": "pypacket.base.mock_processor.MockProcessor"}}'
         log_handler = Logger()
         runtime_configuration = Configuration()
         runtime_configuration.load_json(mock_json)
