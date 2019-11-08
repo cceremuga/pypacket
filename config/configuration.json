@@ -1,16 +1,15 @@
 {
     "listener": {
-        "module": "pypacket.base.rtl_listener",
-        "class": "RtlListener",
+        "class": "pypacket.base.rtl_listener.RtlListener",
         "frequency": "144390000",
         "gain": "49.6",
         "sample_rate": "22050"
-    }, "decoder": {
-        "module": "pypacket.base.multimon_decoder",
-        "class": "MultimonDecoder"
-    }, "processor": {
-        "module": "pypacket.base.aprs_is_processor",
-        "class": "AprsIsProcessor",
+    },
+    "decoder": {
+        "class": "pypacket.base.multimon_decoder.MultimonDecoder"
+    },
+    "processor": {
+        "class": "pypacket.base.aprs_is_processor.AprsIsProcessor",
         "host": "second.aprs.net"
     }
 }

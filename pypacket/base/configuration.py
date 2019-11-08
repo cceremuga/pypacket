@@ -31,20 +31,23 @@ class Configuration:
 
     def listener(self):
         """Gets the configured, instantiated listener class."""
-        module = importlib.import_module(self.data['listener']['module'])
-        class_ = getattr(module, self.data['listener']['class'])
+        module_class_name = self.data['listener']['class'].rpartition('.')
+        module = importlib.import_module(module_class_name[0])
+        class_ = getattr(module, module_class_name[2])
         return class_()
 
     def decoder(self):
         """Gets the configured, instantiated decoder class."""
-        module = importlib.import_module(self.data['decoder']['module'])
-        class_ = getattr(module, self.data['decoder']['class'])
+        module_class_name = self.data['decoder']['class'].rpartition('.')
+        module = importlib.import_module(module_class_name[0])
+        class_ = getattr(module, module_class_name[2])
         return class_()
 
     def processor(self):
         """Gets the configured, instantiated processor class."""
-        module = importlib.import_module(self.data['processor']['module'])
-        class_ = getattr(module, self.data['processor']['class'])
+        module_class_name = self.data['processor']['class'].rpartition('.')
+        module = importlib.import_module(module_class_name[0])
+        class_ = getattr(module, module_class_name[2])
         return class_()
 
     def host(self):
