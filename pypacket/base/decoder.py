@@ -1,7 +1,7 @@
-import abc
+from abc import ABC, abstractmethod
 
 
-class DecoderBase(metaclass=abc.ABCMeta):
-    @abc.abstractmethod
+class DecoderBase(ABC):
+    @abstractmethod
     def load(self, config, log_handler, listener_subprocess):
         pass

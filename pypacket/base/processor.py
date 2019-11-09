@@ -1,11 +1,11 @@
-import abc
+from abc import ABC, abstractmethod
 
 
-class ProcessorBase(metaclass=abc.ABCMeta):
-    @abc.abstractmethod
+class ProcessorBase(ABC):
+    @abstractmethod
     def load(self, config, log_handler):
         pass
 
-    @abc.abstractmethod
+    @abstractmethod
     def handle(self, packet):
         pass
