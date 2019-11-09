@@ -30,7 +30,7 @@ class Deserialization:
                 self.__get_formatted(packet, 'altitude') + \
                 self.__get_formatted(packet, 'comment') + \
                 self.__get_formatted(packet, 'text')
-        except (aprslib.ParseError, aprslib.UnknownFormat) as exp:
+        except (aprslib.ParseError, aprslib.UnknownFormat):
             return serialized_packet
 
     def __get_formatted(self, deserialized_packet, key):

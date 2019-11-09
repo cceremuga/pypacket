@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import time
+
 from pypacket.util.logger import Logger
 from pypacket.base.receiver import Receiver
 from pypacket.base.deserialization import Deserialization

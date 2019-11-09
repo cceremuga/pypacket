@@ -8,14 +8,13 @@ Receive, decode, log, share [APRS](http://www.aprs.org/) packets using low cost 
 
 The following are required to be installed and configured on your system.
 
-* Some form of Linux flavor. I build it on Manjaro. I run it on a Raspberry Pi w/ Raspbian.
+* Some form of Unix-like system. I build it on Mac OS. I run it on a Raspberry Pi w/ Raspbian.
 * An RTL-SDR compatible device.
 * A call-sign login and password for APRS-IS.
 * Python >= v3.6
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
-* [pip](https://pypi.python.org/pypi/pip)
-    * `pip install -r requirements.txt`
+* [pip](https://pypi.python.org/pypi/pip) `pip install -r requirements.txt`
 
 ## Configuration
 
@@ -34,6 +33,9 @@ From a terminal, in the directory where you've cloned the repository...
 
 ## Patch Notes
 
+* 11/9/2019 (v3.2)
+    * Some configuration variables changed names.
+    * Code cleanup, test cleanup, etc.
 * 3/10/2019 (v3.1 / v3.1.1 / v3.1.2)
     * Connect once at start to APRS-IS.
     * All packets uploaded immediately.
@@ -41,8 +43,6 @@ From a terminal, in the directory where you've cloned the repository...
     * Configurable APRS-IS server host.
 * 3/9/2019 (v3.0)
     * From beyond the code-grave the zombie of PyPacket rises with version 3.0. It comes with a fully modular extension framework and once-per-minute uploads to APRS-IS.
-* 5/3/2017 (v2.3)
-    * Integrated code coverage reports, boosted tests.
 
 ## Contributing
 
