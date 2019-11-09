@@ -38,5 +38,5 @@ class TestLogger:
 
         Logger().log_packet(mock_packet, mock_packet)
 
-        out, err = capsys.readouterr()
+        out = capsys.readouterr()[0]
         assert out == expected_packet

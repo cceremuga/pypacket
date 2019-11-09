@@ -14,7 +14,7 @@ class TestReceiver:
 
         test_receiver = Receiver(log_handler, deserializer, runtime_configuration)
 
-        assert test_receiver.is_running == False
+        assert test_receiver.is_running is False
         assert test_receiver.sub_processes == {}
         assert test_receiver.log_handler == log_handler
         assert test_receiver.deserializer == deserializer
@@ -44,7 +44,7 @@ class TestReceiver:
 
         actual_packet = test_receiver._Receiver__clean_decoded_packet(mock_packet)
 
-        assert actual_packet == None
+        assert actual_packet is None
 
     def test_clean_decoded_packet_with_aprs_expect_cleaned(self):
         log_handler = Logger()
@@ -72,4 +72,4 @@ class TestReceiver:
 
         test_receiver.start()
 
-        assert test_receiver.is_running == True
+        assert test_receiver.is_running is True

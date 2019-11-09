@@ -1,9 +1,5 @@
 from pypacket.base.processor import ProcessorBase
-from aprslib.exceptions import (
-    ConnectionDrop,
-    ConnectionError,
-    LoginError
-)
+from aprslib.exceptions import ConnectionDrop, ConnectionError, LoginError
 import aprslib
 import os
 

@@ -36,6 +36,7 @@ From a terminal, in the directory where you've cloned the repository...
 * 11/9/2019 (v3.2)
     * Some configuration variables changed names.
     * Code cleanup, test cleanup, etc.
+    * Quality reports via Codacy.
 * 3/10/2019 (v3.1 / v3.1.1 / v3.1.2)
     * Connect once at start to APRS-IS.
     * All packets uploaded immediately.
