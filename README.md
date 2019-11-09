@@ -2,7 +2,7 @@
 
 Receive, decode, log, share [APRS](http://www.aprs.org/) packets using low cost [RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr) devices.
 
-[![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket) [![Coverage Status](https://coveralls.io/repos/github/cceremuga/pypacket/badge.svg?branch=master)](https://coveralls.io/github/cceremuga/pypacket?branch=master)
+[![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket) [![Coverage Status](https://coveralls.io/repos/github/cceremuga/pypacket/badge.svg?branch=master)](https://coveralls.io/github/cceremuga/pypacket?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/55cfa693d652488e994b6782fed2eccc)](https://www.codacy.com/manual/cceremuga_3/pypacket?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cceremuga/pypacket&amp;utm_campaign=Badge_Grade)
 
 ## Pre-requisites
 
