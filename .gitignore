@@ -93,6 +93,7 @@ logs/
 
 # IDE
 .idea/
+.vscode/
 
 # Runtime script
 run.sh
