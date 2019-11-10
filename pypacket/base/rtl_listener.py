@@ -4,8 +4,7 @@ from pypacket.base.listener import ListenerBase
 
 class RtlListener(ListenerBase):
     def load(self, config, log_handler):
-        log_handler.log_info('Starting listener subprocess, listening on ' + \
-            config.frequency() + '.')
+        log_handler.log_info('Starting listener subprocess, listening on {0}.'.format(config.frequency()))
 
         # Start listener subprocess which listens for APRS packets.
         return subprocess.Popen(

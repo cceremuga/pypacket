@@ -39,12 +39,10 @@ class Receiver:
     def start(self):
         """Starts the listener, decoder sub-processes, processor. Starts a worker thread."""
         listener = self.config.listener()
-        self.sub_processes['listener'] = \
-            listener.load(self.config, self.log_handler)
+        self.sub_processes['listener'] = listener.load(self.config, self.log_handler)
 
         decoder = self.config.decoder()
-        self.sub_processes['decoder'] = \
-            decoder.load(self.config, self.log_handler, self.sub_processes['listener'])
+        self.sub_processes['decoder'] = decoder.load(self.config, self.log_handler, self.sub_processes['listener'])
 
         self.processor = self.config.processor()
         self.processor.load(self.config, self.log_handler)
@@ -72,8 +70,7 @@ class Receiver:
         Args:
             decoded_packet: The raw, decoded APRS packet string.
         """
-        print_friendly_packet = \
-            self.deserializer.to_readable_output(decoded_packet)
+        print_friendly_packet = self.deserializer.to_readable_output(decoded_packet)
         self.log_handler.log_packet(decoded_packet, print_friendly_packet)
         self.processor.handle(decoded_packet)
 
@@ -88,8 +85,7 @@ class Receiver:
         Args:
             decoded_packet: The raw, decoded APRS packet string, uncleaned.
         """
-        aprs_match = re.compile(r'^APRS: (.*)') \
-            .match(decoded_packet)
+        aprs_match = re.compile(r'^APRS: (.*)').match(decoded_packet)
         if aprs_match:
             return aprs_match.group(1)
 
@@ -101,9 +97,12 @@ class Receiver:
 
         while self.is_running:
             try:
-                decoded_packet = self.sub_processes['decoder'] \
-                    .stdout.readline().decode('utf-8').strip()
+                decoder = self.sub_processes['decoder']
 
+                if decoder is None or decoder.stdout is None:
+                    continue
+
+                decoded_packet = decoder.stdout.readline().decode('utf-8').strip()
                 cleaned_packet = self.__clean_decoded_packet(decoded_packet)
 
                 if cleaned_packet is not None:
