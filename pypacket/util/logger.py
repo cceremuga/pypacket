@@ -79,7 +79,5 @@ class Logger:
             os.makedirs(self.LOG_DIRECTORY)
 
         log_format = '[%(asctime)-15s] [%(levelname)s] %(message)s'
-        log_file_name = self.LOG_DIRECTORY + '/pypacket_' + \
-            strftime("%Y_%m_%d_%H_%M_%S", localtime()) + '.log'
-        logging.basicConfig(filename=log_file_name, format=log_format, \
-            level=logging.INFO)
+        log_file_name = self.LOG_DIRECTORY + '/pypacket_' + strftime("%Y_%m_%d_%H_%M_%S", localtime()) + '.log'
+        logging.basicConfig(filename=log_file_name, format=log_format, level=logging.INFO)
