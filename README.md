@@ -14,7 +14,6 @@ The following are required to be installed and configured on your system.
 * Python >= v3.6
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
-* [pip](https://pypi.python.org/pypi/pip) `pip install -r requirements.txt`
 
 ## Configuration
 
@@ -27,7 +26,8 @@ From a terminal, in the directory where you've cloned the repository...
 * Ensure you have the following environment variables set:
     * `PYPACKET_USERNAME` - Your call sign for APRS-IS
     * `PYPACKET_PASSWORD` - Your password for APRS-IS
-* Run `python main.py`.
+* Run `pip install -r requirements.txt`
+* Run `./main.py`.
     * The application will start and immediately begin listening on the configured frequency.
     * Logged packets will be output to your terminal, written to a file in the `logs` directory, and uploaded to APRS-IS.
 
