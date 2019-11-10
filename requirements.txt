@@ -1,4 +1,4 @@
-aprslib
+aprslib==0.6.47
 coveralls
 pytest
 pytest-cov
