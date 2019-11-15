@@ -1,7 +1,7 @@
-from pypacket.base.processor import ProcessorBase
+from pypacket.framework.processor import Processor
 
 
-class MockProcessor(ProcessorBase):
+class MockProcessor(Processor):
     def __init__(self):
         self.log_handler = None
 

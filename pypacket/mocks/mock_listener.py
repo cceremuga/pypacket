@@ -1,6 +1,6 @@
-from pypacket.base.listener import ListenerBase
+from pypacket.framework.listener import Listener
 
 
-class MockListener(ListenerBase):
+class MockListener(Listener):
     def load(self, config, log_handler):
         log_handler.log_info('Starting mock listener subprocess.')

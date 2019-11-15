@@ -1,7 +1,11 @@
 from abc import ABC, abstractmethod
 
 
-class ListenerBase(ABC):
+class Processor(ABC):
     @abstractmethod
     def load(self, config, log_handler):
+        pass
+
+    @abstractmethod
+    def handle(self, packet):
         pass

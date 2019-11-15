@@ -1,6 +1,6 @@
-from pypacket.base.decoder import DecoderBase
+from pypacket.framework.decoder import Decoder
 
 
-class MockDecoder(DecoderBase):
+class MockDecoder(Decoder):
     def load(self, config, log_handler, listener_subprocess):
         log_handler.log_info('Starting mock decoder subprocess.')

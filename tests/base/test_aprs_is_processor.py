@@ -1,8 +1,9 @@
 from unittest import mock
 
-from pypacket.base.aprs_is_processor import AprsIsProcessor
 from pypacket.base.configuration import Configuration
+from pypacket.implementations.aprs_is_processor import AprsIsProcessor
 from pypacket.util.logger import Logger
+
 
 class TestAprsIsProcessor:
     @mock.patch('aprslib.IS.connect')
@@ -26,5 +27,3 @@ class TestAprsIsProcessor:
         processor.handle(None)
 
         mock_handle.assert_called_once()
-
-

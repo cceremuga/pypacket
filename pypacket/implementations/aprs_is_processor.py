@@ -1,10 +1,10 @@
-from pypacket.base.processor import ProcessorBase
+from pypacket.framework.processor import Processor
 from aprslib.exceptions import ConnectionDrop, ConnectionError, LoginError
 import aprslib
 import os
 
 
-class AprsIsProcessor(ProcessorBase):
+class AprsIsProcessor(Processor):
     def __init__(self):
         """Sets up the functionality we will be using to upload to APRS-IS."""
         self.log_handler = None

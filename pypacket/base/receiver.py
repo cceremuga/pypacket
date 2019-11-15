@@ -38,11 +38,9 @@ class Receiver:
 
     def start(self):
         """Starts the listener, decoder sub-processes, processor. Starts a worker thread."""
-        listener = self.config.listener()
-        self.sub_processes['listener'] = listener.load(self.config, self.log_handler)
-
-        decoder = self.config.decoder()
-        self.sub_processes['decoder'] = decoder.load(self.config, self.log_handler, self.sub_processes['listener'])
+        listener = self.__get_listener()
+        self.sub_processes['listener'] = listener
+        self.sub_processes['decoder'] = self.__get_decoder(listener)
 
         self.processor = self.config.processor()
         self.processor.load(self.config, self.log_handler)
@@ -61,6 +59,16 @@ class Receiver:
         self.log_handler.log_info('Interrupt received, exiting.')
 
         sys.exit(0)
+
+    def __get_decoder(self, listener):
+        """Gets the decoder subprocess from the config."""
+        decoder = self.config.decoder()
+        return decoder.load(self.config, self.log_handler, listener)
+
+    def __get_listener(self):
+        """Gets the listener subprocess from the config."""
+        listener = self.config.listener()
+        return listener.load(self.config, self.log_handler)
 
     def __process_decoded_packet(self, decoded_packet):
         """Parses the decoded packet, logging the raw data to file
