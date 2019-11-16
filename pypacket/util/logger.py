@@ -55,7 +55,7 @@ class Logger:
             raw_message: The raw string message to log to file.
             friendly_message: The user friendly message to log to CLI.
         """
-        self.__log_any(Colors.GREEN, self.REC_PREFIX, friendly_message)
+        self.__log_any(Colors.RESET, '', friendly_message)
         logging.info(raw_message)
 
     def __log_any(self, color, prefix, log_message):

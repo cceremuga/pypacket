@@ -43,16 +43,25 @@ class Configuration:
         class_ = getattr(module, module_class_name[2])
         return class_()
 
-    def processor(self):
-        """Gets the configured, instantiated processor class."""
-        module_class_name = self.data['processor']['implementation'].rpartition('.')
-        module = importlib.import_module(module_class_name[0])
-        class_ = getattr(module, module_class_name[2])
-        return class_()
+    def processors(self):
+        """Gets the configured, instantiated processor classes."""
+        processors = []
 
-    def host(self):
+        for processor in self.data['processors']:
+            module_class_name = processor['implementation'].rpartition('.')
+            module = importlib.import_module(module_class_name[0])
+            class_ = getattr(module, module_class_name[2])
+            processors.append(class_())
+
+        return processors
+
+    def host(self, name):
         """Gets the configured processor host."""
-        return self.data['processor']['host']
+        for processor in self.data['processors']:
+            if processor['name'] == name:
+                return processor['host']
+
+        return ''
 
     def load_json(self, json_data):
         """Loads in JSON data from a String, assigning to data."""

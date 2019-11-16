@@ -9,3 +9,7 @@ class Processor(ABC):
     @abstractmethod
     def handle(self, packet):
         pass
+
+    @abstractmethod
+    def get_name(self):
+        pass

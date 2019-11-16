@@ -12,6 +12,10 @@ class AprsIsProcessor(Processor):
         self.is_client = None
         self.is_connected = False
 
+    def get_name(self):
+        """Gets the name of this processor to match against the config."""
+        return "aprs-is"
+
     def load(self, config, log_handler):
         """Connects to APRS-IS to get ready for packet upload.
 
@@ -24,7 +28,13 @@ class AprsIsProcessor(Processor):
 
         username = self.__get_username()
         password = self.__get_password()
-        host = self.config.host()
+
+        if username is None or password is None:
+            self.log_handler.log_warn(
+                'Username or password for APRS-IS not set, will not be uploading. See README for more info.')
+            return
+
+        host = self.config.host(self.get_name())
         self.is_client = aprslib.IS(username, passwd=password, host=host, port=14580)
 
         try:
@@ -53,13 +63,13 @@ class AprsIsProcessor(Processor):
             return
 
     def __get_username(self):
-        return os.environ.get('PYPACKET_USERNAME', 'setme')
+        return os.environ.get('PYPACKET_USERNAME')
 
     def __get_password(self):
-        return os.environ.get('PYPACKET_PASSWORD', 'setme')
+        return os.environ.get('PYPACKET_PASSWORD')
 
     def __is_reconnect(self):
-        self.log_handler.log_warning('Disconnected from APRS-IS, attempting to reconnect.')
+        self.log_handler.log_warn('Disconnected from APRS-IS, attempting to reconnect.')
         self.__is_connect()
 
     def __is_connect(self):
