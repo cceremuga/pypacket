@@ -33,6 +33,11 @@ From a terminal, in the directory where you've cloned the repository...
 
 ## Patch Notes
 
+* 11/17/2019 (v4.0)
+    * All new tabular CLI UI for packet output.
+    * Can now be configured to have N processors.
+    * Configuration format improvements.
+    * New dependencies, be sure to `pip install -r requirements.txt`.
 * 11/16/2019 (v3.3)
     * Resolves bug #11 where an rtl_fm startup crash was not being detected, causing excessive CPU usage.
 * 11/9/2019 (v3.2)

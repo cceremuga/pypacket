@@ -1,5 +1,7 @@
 import aprslib
-from pypacket.util.colors import Colors
+import re
+
+from terminaltables import SingleTable
 
 
 class Deserialization:
@@ -22,22 +24,34 @@ class Deserialization:
         """
         try:
             packet = aprslib.parse(serialized_packet)
-            return self.__get_formatted(packet, 'from').replace(self.SPACING_PREFIX, '') + \
-                self.__get_formatted(packet, 'to') + \
-                self.__get_formatted(packet, 'format') + \
-                self.__get_formatted(packet, 'latitude') + \
-                self.__get_formatted(packet, 'longitude') + \
-                self.__get_formatted(packet, 'altitude') + \
-                self.__get_formatted(packet, 'comment') + \
-                self.__get_formatted(packet, 'text')
+
+            table_data = [
+                [
+                    "From     ",
+                    "To       ",
+                    "Lat     ",
+                    "Long    ",
+                    "Comment                    ",
+                    "Text                       "
+                ], [
+                    self.__get_formatted(packet, 'from', 9),
+                    self.__get_formatted(packet, 'to', 9),
+                    self.__get_formatted(packet, 'latitude', 8),
+                    self.__get_formatted(packet, 'longitude', 8),
+                    self.__get_formatted(packet, 'comment', 27),
+                    self.__get_formatted(packet, 'text', 27),
+                ]
+            ]
+            table_instance = SingleTable(table_data, ' Packet ')
+            table_instance.inner_heading_row_border = False
+            table_instance.inner_row_border = True
+            return table_instance.table
         except (aprslib.ParseError, aprslib.UnknownFormat):
             return serialized_packet
 
-    def __get_formatted(self, deserialized_packet, key):
+    def __get_formatted(self, deserialized_packet, key, split):
         if key not in deserialized_packet:
             return ''
 
-        return self.__get_prefix(key + ':') + str(deserialized_packet[key])
-
-    def __get_prefix(self, prefix):
-        return self.SPACING_PREFIX + Colors.BOLD + prefix + Colors.RESET + ' '
+        packet_field_value = str(deserialized_packet[key])
+        return re.sub("(.{" + str(split) + "})", "\\1\n", packet_field_value, 0, re.DOTALL)

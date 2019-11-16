@@ -35,16 +35,18 @@ class Receiver:
         self.deserializer = deserializer
         self.config = config
         self.worker_thread = None
-        self.processor = None
+        self.processors = None
 
     def start(self):
-        """Starts the listener, decoder sub-processes, processor. Starts a worker thread."""
+        """Starts the listener, decoder sub-processes, processors. Starts a worker thread."""
         listener = self.__get_listener()
         self.sub_processes['listener'] = listener
         self.sub_processes['decoder'] = self.__get_decoder(listener)
 
-        self.processor = self.config.processor()
-        self.processor.load(self.config, self.log_handler)
+        self.processors = self.config.processors()
+        for processor in self.processors:
+            # Load each processor.
+            processor.load(self.config, self.log_handler)
 
         # Throw the sub-processes into a worker thread.
         self.is_running = True
@@ -96,7 +98,10 @@ class Receiver:
         """
         print_friendly_packet = self.deserializer.to_readable_output(decoded_packet)
         self.log_handler.log_packet(decoded_packet, print_friendly_packet)
-        self.processor.handle(decoded_packet)
+
+        for processor in self.processors:
+            # Process in all configured processors.
+            processor.handle(decoded_packet)
 
     def __clean_decoded_packet(self, decoded_packet):
         """Multimon-ng returns a string which starts with 'APRS: '.

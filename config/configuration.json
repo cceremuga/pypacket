@@ -8,8 +8,9 @@
     "decoder": {
         "implementation": "pypacket.implementations.multimon_decoder.MultimonDecoder"
     },
-    "processor": {
+    "processors": [{
+        "name": "aprs-is",
         "implementation": "pypacket.implementations.aprs_is_processor.AprsIsProcessor",
         "host": "second.aprs.net"
-    }
+    }]
 }

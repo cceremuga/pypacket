@@ -62,7 +62,7 @@ class TestReceiver:
     def test_start_with_mock_instances_expect_started(self):
         mock_json = '{"listener":{"implementation": "pypacket.mocks.mock_listener.MockListener"},' + \
             '"decoder":{"implementation": "pypacket.mocks.mock_decoder.MockDecoder"}, ' + \
-            '"processor": {"implementation": "pypacket.mocks.mock_processor.MockProcessor"}}'
+            '"processors": [{"name": "mock", "implementation": "pypacket.mocks.mock_processor.MockProcessor"}]}'
         log_handler = Logger()
         runtime_configuration = Configuration()
         runtime_configuration.load_json(mock_json)
