@@ -1,7 +1,6 @@
 import aprslib
 import re
 
-from pypacket.util.colors import Colors
 from terminaltables import SingleTable
 
 

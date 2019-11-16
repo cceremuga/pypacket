@@ -1,4 +1,3 @@
-from terminaltables import SingleTable
 from pypacket.base.deserialization import Deserialization
 from pypacket.util.colors import Colors
 
