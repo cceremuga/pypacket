@@ -1,6 +1,7 @@
 import threading
 import re
 import sys
+from subprocess import TimeoutExpired
 
 
 class Receiver:
@@ -68,7 +69,22 @@ class Receiver:
     def __get_listener(self):
         """Gets the listener subprocess from the config."""
         listener = self.config.listener()
-        return listener.load(self.config, self.log_handler)
+        listener_subprocess = listener.load(self.config, self.log_handler)
+
+        exit_code = 0
+
+        try:
+            # It will exit immediately with a 1 if there is a listener subprocess crash.
+            exit_code = listener_subprocess.wait(5)
+        except TimeoutExpired:
+            # If the timeout has expired after 5 seconds, the listener is working just fine.
+            exit_code = 0
+
+        if exit_code == 1:
+            self.log_handler.log_error('Listener subprocess did not start successfully.')
+            sys.exit(1)
+
+        return listener_subprocess
 
     def __process_decoded_packet(self, decoded_packet):
         """Parses the decoded packet, logging the raw data to file
@@ -101,7 +117,7 @@ class Receiver:
 
     def __decoder_worker(self):
         """A worker thread handling output from the decoder sub-process."""
-        self.log_handler.log_info('Worker thread starting.')
+        self.log_handler.log_info('Worker thread started.')
 
         while self.is_running:
             try:

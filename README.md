@@ -33,6 +33,8 @@ From a terminal, in the directory where you've cloned the repository...
 
 ## Patch Notes
 
+* 11/16/2019 (v3.3)
+    * Resolves bug #11 where an rtl_fm startup crash was not being detected, causing excessive CPU usage.
 * 11/9/2019 (v3.2)
     * Some configuration variables changed names.
     * Code cleanup, test cleanup, etc.
@@ -42,8 +44,6 @@ From a terminal, in the directory where you've cloned the repository...
     * All packets uploaded immediately.
     * Connection resiliency, will reconnect when disconnected.
     * Configurable APRS-IS server host.
-* 3/9/2019 (v3.0)
-    * From beyond the code-grave the zombie of PyPacket rises with version 3.0. It comes with a fully modular extension framework and once-per-minute uploads to APRS-IS.
 
 ## Contributing
 

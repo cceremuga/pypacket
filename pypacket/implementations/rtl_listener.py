@@ -1,4 +1,4 @@
-import subprocess
+from subprocess import Popen, PIPE, STDOUT
 from pypacket.framework.listener import Listener
 
 
@@ -7,8 +7,8 @@ class RtlListener(Listener):
         log_handler.log_info('Starting listener subprocess, listening on {0}.'.format(config.frequency()))
 
         # Start listener subprocess which listens for APRS packets.
-        return subprocess.Popen(
+        return Popen(
             ['rtl_fm', '-M', 'fm', '-f', config.frequency(), '-s',
             config.sample_rate(), '-l', '0', '-g', config.gain(), '-'],
-            stdout=subprocess.PIPE, stderr=open('/dev/null')
+            stdout=PIPE, stderr=STDOUT
         )
