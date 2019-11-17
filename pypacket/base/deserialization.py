@@ -1,7 +1,7 @@
 import aprslib
 import re
 
-from terminaltables import SingleTable
+from terminaltables import AsciiTable
 
 
 class Deserialization:
@@ -42,10 +42,10 @@ class Deserialization:
                     self.__get_formatted(packet, 'text', 27),
                 ]
             ]
-            table_instance = SingleTable(table_data, ' Packet ')
+            table_instance = AsciiTable(table_data, ' Packet ')
             table_instance.inner_heading_row_border = False
             table_instance.inner_row_border = True
-            return table_instance.table
+            return '\n' + table_instance.table
         except (aprslib.ParseError, aprslib.UnknownFormat):
             return serialized_packet
 
