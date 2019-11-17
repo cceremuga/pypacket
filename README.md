@@ -4,41 +4,38 @@ Receive, decode, log, share [APRS](http://www.aprs.org/) packets using low cost 
 
 [![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket) [![Coverage Status](https://coveralls.io/repos/github/cceremuga/pypacket/badge.svg?branch=master)](https://coveralls.io/github/cceremuga/pypacket?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/55cfa693d652488e994b6782fed2eccc)](https://www.codacy.com/manual/cceremuga_3/pypacket?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cceremuga/pypacket&amp;utm_campaign=Badge_Grade) [![Requirements Status](https://pyup.io/repos/github/cceremuga/pypacket/shield.svg)](https://pyup.io/account/repos/github/cceremuga/pypacket/) [![Requirements Status](https://pyup.io/repos/github/cceremuga/pypacket/python-3-shield.svg)](https://pyup.io/account/repos/github/cceremuga/pypacket/) 
 
-## Pre-requisites
+## Requirements
 
 The following are required to be installed and configured on your system.
 
-* Some form of Unix-like system. I build it on Mac OS. I run it on a Raspberry Pi w/ Raspbian.
 * An RTL-SDR compatible device.
-* A call-sign login and password for APRS-IS.
+* Some form of Unix-like system. I build it on Mac OS. I run it on a Raspberry Pi w/ Raspbian.
 * Python >= v3.6
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
+* Optonally, a call-sign login and password for APRS-IS to upload spots.
 
-## Configuration
+## Setup
 
-The `config/configuration.json` file contains all of the insecure runtime configuration settings.
-
-## Usage
-
-From a terminal, in the directory where you've cloned the repository...
-
-* Ensure you have the following environment variables set:
+* `config/configuration.json` contains all insecure runtime configuration settings.
+* If you want to upload spots to APRS-IS, ensure you have the following environment variables set:
     * `PYPACKET_USERNAME` - Your call sign for APRS-IS
     * `PYPACKET_PASSWORD` - Your password for APRS-IS
 * Run `pip install -r requirements.txt`
+
+## Usage
+
 * Run `./main.py`.
     * The application will start and immediately begin listening on the configured frequency.
-    * Logged packets will be output to your terminal, written to a file in the `logs` directory, and uploaded to APRS-IS.
+    * Logged packets will be output to your terminal, written to a file in the `logs` directory, and (if configured) uploaded to APRS-IS.
 
-## Patch Notes
+## Release Notes
 
 * 11/17/2019 (v4.0)
     * All new tabular CLI UI for packet output.
     * Can now be configured to have N processors.
     * Configuration format improvements.
     * New dependencies, be sure to `pip install -r requirements.txt`.
-* 11/16/2019 (v3.3)
     * Resolves bug #11 where an rtl_fm startup crash was not being detected, causing excessive CPU usage.
 * 11/9/2019 (v3.2)
     * Some configuration variables changed names.
