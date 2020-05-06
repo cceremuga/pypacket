@@ -53,5 +53,6 @@ You are welcome to contribute by submitting pull requests on GitHub if you would
 
 ## Credits
 
+* [ ~ Dependencies scanned by PyUp.io ~ ]
 * Radio tower icon found in the logo courtesy of [The Noun Project](https://thenounproject.com/search/?q=radio%20tower&i=749293).
 * Project was inspired by [pymultimonaprs](https://github.com/asdil12/pymultimonaprs).
