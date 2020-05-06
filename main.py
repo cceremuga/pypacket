@@ -7,6 +7,7 @@ from pypacket.base.receiver import Receiver
 from pypacket.base.deserialization import Deserialization
 from pypacket.base.configuration import Configuration
 from pypacket.util.colors import Colors
+from dotenv import load_dotenv
 
 print(Colors.GREEN + """
   ___      ___         _       _
@@ -15,6 +16,9 @@ print(Colors.GREEN + """
  |_|  \_, |_| \__,_\__|_\_\___|\__|
       |__/
 """ + Colors.RESET)
+
+# Load envs
+load_dotenv()
 
 # Configure logging.
 log_handler = Logger()
