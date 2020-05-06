@@ -1,5 +1,5 @@
 aprslib==0.6.47
-coveralls==1.11.1
+coveralls==2.0.0
 pytest==5.4.1
 pytest-cov==2.8.1
 terminaltables==3.1.0
