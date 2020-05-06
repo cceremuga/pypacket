@@ -31,6 +31,8 @@ The following are required to be installed and configured on your system.
 
 ## Release Notes
 
+* 5/6/2020 (v4.1)
+    * Simple flat file environment variable support via python-dotenv.
 * 11/17/2019 (v4.0)
     * All new tabular CLI UI for packet output.
     * Can now be configured to have N processors.
