@@ -29,6 +29,12 @@ class Configuration:
         """Gets the configured listener sample rate setting."""
         return self.data['listener']['sample_rate']
 
+    def squelch_level(self):
+        return self.data['listener']['squelch_level']
+
+    def ppm_error(self):
+        return self.data['listener']['ppm_error']
+
     def listener(self):
         """Gets the configured, instantiated listener class."""
         module_class_name = self.data['listener']['implementation'].rpartition('.')
