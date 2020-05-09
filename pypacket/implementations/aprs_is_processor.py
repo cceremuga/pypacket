@@ -73,7 +73,8 @@ class AprsIsProcessor(Processor):
         self.__is_connect()
 
     def __is_connect(self):
-        self.log_handler.log_info('Connecting to APR-IS.')
+        self.log_handler.log_info('Connecting to APRS-IS.')
         self.is_client.connect()
         self.is_connected = True
         self.log_handler.log_info('Connected!')
+        self.log_handler.log_info('Working as ' + self.__get_username())
