@@ -3,6 +3,8 @@
         "implementation": "pypacket.implementations.rtl_listener.RtlListener",
         "frequency": "144390000",
         "gain": "49.6",
+        "ppm_error": "0",
+        "squelch_level": "0",
         "sample_rate": "22050"
     },
     "decoder": {
