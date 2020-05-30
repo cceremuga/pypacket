@@ -56,10 +56,11 @@ class Receiver:
 
     def stop(self):
         """Kills all sub-processes inside-out, performs a system exit."""
-        for key in reversed(self.sub_processes.keys()):
-            self.sub_processes[key].kill()
-
         self.log_handler.log_info('Interrupt received, exiting.')
+
+        if self.sub_processes:
+            for key in reversed(self.sub_processes.keys()):
+                self.sub_processes[key].kill()
 
         sys.exit(0)
 

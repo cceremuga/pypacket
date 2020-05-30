@@ -47,15 +47,19 @@ class Configuration:
         return self.data['beacon_interval']
 
     def username(self):
+        """Gets the APRS-IS username (callsign)."""
         return os.environ.get('PYPACKET_USERNAME')
 
     def password(self):
+        """Gets the APRS-IS password."""
         return os.environ.get('PYPACKET_PASSWORD')
 
     def latitude(self):
+        """Gets the beacon latitude."""
         return os.environ.get('PYPACKET_LATITUDE')
 
     def longitude(self):
+        """Gets the beacon longitude"""
         return os.environ.get('PYPACKET_LONGITUDE')
 
     def listener(self):
