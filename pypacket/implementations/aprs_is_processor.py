@@ -1,7 +1,8 @@
 from pypacket.framework.processor import Processor
+from pypacket.framework.beacon import Beacon
 from aprslib.exceptions import ConnectionDrop, ConnectionError, LoginError
 import aprslib
-import os
+import datetime
 
 
 class AprsIsProcessor(Processor):
@@ -11,6 +12,7 @@ class AprsIsProcessor(Processor):
         self.config = None
         self.is_client = None
         self.is_connected = False
+        self.last_beacon = None
 
     def get_name(self):
         """Gets the name of this processor to match against the config."""
@@ -26,10 +28,10 @@ class AprsIsProcessor(Processor):
         self.config = config
         self.log_handler = log_handler
 
-        username = self.__get_username()
-        password = self.__get_password()
+        username = self.config.username()
+        password = self.config.password()
 
-        if username is None or password is None:
+        if not username or not password:
             self.log_handler.log_warn(
                 'Username or password for APRS-IS not set, will not be uploading. See README for more info.')
             return
@@ -54,19 +56,17 @@ class AprsIsProcessor(Processor):
             return
 
         try:
+            print(packet)
             self.is_client.sendall(packet)
+
+            # Potentially transmit a beacon.
+            self.__send_beacon()
         except ConnectionDrop:
             self.__is_reconnect()
             return
         except ConnectionError:
             self.__is_reconnect()
             return
-
-    def __get_username(self):
-        return os.environ.get('PYPACKET_USERNAME')
-
-    def __get_password(self):
-        return os.environ.get('PYPACKET_PASSWORD')
 
     def __is_reconnect(self):
         self.log_handler.log_warn('Disconnected from APRS-IS, attempting to reconnect.')
@@ -76,4 +76,32 @@ class AprsIsProcessor(Processor):
         self.log_handler.log_info('Connecting to APRS-IS.')
         self.is_client.connect()
         self.is_connected = True
-        self.log_handler.log_info('Connected as {0}.'.format(self.__get_username()))
+        self.log_handler.log_info('Connected as {0}.'.format(self.config.username()))
+        self.__send_beacon()
+
+    def __send_beacon(self):
+        """ Transmits a beacon on connect if lat/long is set. """
+        if not self.config.latitude() or not self.config.longitude():
+            return
+
+        # Only send beacon if X minute(s) has passed since last beacon.
+        now = datetime.datetime.now()
+        minutes_since_beacon = 0
+
+        if self.last_beacon is not None:
+            difference = now - self.last_beacon
+            minutes_since_beacon = (difference.seconds / 60)
+
+        if self.last_beacon is not None and minutes_since_beacon < self.config.beacon_interval():
+            return
+
+        self.log_handler.log_info(
+            'Sending IGate beacon for {0} {1}. Another will send in approximately {2} minute(s) when a packet is received.'.
+            format(
+                self.config.latitude(),
+                self.config.longitude(),
+                self.config.beacon_interval()))
+
+        beacon = Beacon(self.config)
+        self.handle(beacon)
+        self.last_beacon = datetime.datetime.now()

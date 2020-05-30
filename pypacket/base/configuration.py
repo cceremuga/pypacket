@@ -1,5 +1,6 @@
 import json
 import importlib
+import os
 
 
 class Configuration:
@@ -36,6 +37,26 @@ class Configuration:
     def ppm_error(self):
         """Gets the configured ppm error."""
         return self.data['listener']['ppm_error']
+
+    def version(self):
+        """Gets the PyPacket version."""
+        return self.data['version']
+
+    def beacon_interval(self):
+        """Gets the beacon interval."""
+        return self.data['beacon_interval']
+
+    def username(self):
+        return os.environ.get('PYPACKET_USERNAME')
+
+    def password(self):
+        return os.environ.get('PYPACKET_PASSWORD')
+
+    def latitude(self):
+        return os.environ.get('PYPACKET_LATITUDE')
+
+    def longitude(self):
+        return os.environ.get('PYPACKET_LONGITUDE')
 
     def listener(self):
         """Gets the configured, instantiated listener class."""
@@ -76,6 +97,6 @@ class Configuration:
         self.data = json.loads(json_data)
 
     def __load(self):
-        """Loads in JSON data from the config file, assigning to data."""
+        """Loads in JSON config, assigning to data."""
         with open(self.CONFIG_FILE_NAME) as json_data_file:
             self.data = json.load(json_data_file)

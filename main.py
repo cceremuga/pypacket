@@ -23,7 +23,7 @@ print(Colors.GREEN + """
       |__/
 """ + Colors.RESET)
 
-# Load envs
+# Load envs.
 load_dotenv()
 
 # Configure logging.

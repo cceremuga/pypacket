@@ -21,6 +21,8 @@ The following are required to be installed and configured on your system.
 * If you want to upload spots to APRS-IS, ensure you have the following environment variables set:
     * `PYPACKET_USERNAME` - Your call sign for APRS-IS
     * `PYPACKET_PASSWORD` - Your password for APRS-IS
+    * `PYPACKET_LATITUDE` - The latitude where your receiver running PyPacket resides. Optional.
+    * `PYPACKET_LONGITUDE` - The longitude where your receiver running PyPacket resides. Optional.
     * Rename `.env.example` to `.env` and fill in the appropriate values.
 * Run `pip install -r requirements.txt`
 
@@ -33,10 +35,10 @@ The following are required to be installed and configured on your system.
 ## Release Notes
 
 * 5/31/2020 (v5.0)
-    * Minor cosmetic adjustments.
+    * Thank you to everyone who contributed bug reports, enhancements, and pull requests!
     * Support for squelch level and PPM error configuration options.
-    * Simplified environment variable loading for APRS-IS username/password.
     * SIGINT is now properly handled, exiting subprocesses before terminating main thread.
+    * If configured with latitude and longitude, will transmit an IGate beacon to APRS-IS every 10 minutes (configurable).
 * 5/6/2020 (v4.1)
     * Simple flat file environment variable support via python-dotenv.
 * 11/17/2019 (v4.0)
