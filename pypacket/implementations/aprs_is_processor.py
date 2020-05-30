@@ -76,5 +76,4 @@ class AprsIsProcessor(Processor):
         self.log_handler.log_info('Connecting to APRS-IS.')
         self.is_client.connect()
         self.is_connected = True
-        self.log_handler.log_info('Connected!')
-        self.log_handler.log_info('Working as ' + self.__get_username())
+        self.log_handler.log_info('Connected as {0}.'.format(self.__get_username()))

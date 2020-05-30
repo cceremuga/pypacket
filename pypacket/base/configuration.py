@@ -30,9 +30,11 @@ class Configuration:
         return self.data['listener']['sample_rate']
 
     def squelch_level(self):
+        """Gets the configured squelch level."""
         return self.data['listener']['squelch_level']
 
     def ppm_error(self):
+        """Gets the configured ppm error."""
         return self.data['listener']['ppm_error']
 
     def listener(self):

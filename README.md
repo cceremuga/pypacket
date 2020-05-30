@@ -21,6 +21,7 @@ The following are required to be installed and configured on your system.
 * If you want to upload spots to APRS-IS, ensure you have the following environment variables set:
     * `PYPACKET_USERNAME` - Your call sign for APRS-IS
     * `PYPACKET_PASSWORD` - Your password for APRS-IS
+    * Rename `.env.example` to `.env` and fill in the appropriate values.
 * Run `pip install -r requirements.txt`
 
 ## Usage
@@ -31,6 +32,11 @@ The following are required to be installed and configured on your system.
 
 ## Release Notes
 
+* 5/31/2020 (v5.0)
+    * Minor cosmetic adjustments.
+    * Support for squelch level and PPM error configuration options.
+    * Simplified environment variable loading for APRS-IS username/password.
+    * SIGINT is now properly handled, exiting subprocesses before terminating main thread.
 * 5/6/2020 (v4.1)
     * Simple flat file environment variable support via python-dotenv.
 * 11/17/2019 (v4.0)
@@ -43,11 +49,6 @@ The following are required to be installed and configured on your system.
     * Some configuration variables changed names.
     * Code cleanup, test cleanup, etc.
     * Quality reports via Codacy.
-* 3/10/2019 (v3.1 / v3.1.1 / v3.1.2)
-    * Connect once at start to APRS-IS.
-    * All packets uploaded immediately.
-    * Connection resiliency, will reconnect when disconnected.
-    * Configurable APRS-IS server host.
 
 ## Contributing
 

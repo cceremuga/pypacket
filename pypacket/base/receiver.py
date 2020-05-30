@@ -55,9 +55,9 @@ class Receiver:
         self.worker_thread.start()
 
     def stop(self):
-        """Stops all sub-processes, performs a system exit."""
-        for key in self.sub_processes:
-            self.sub_processes[key].terminate()
+        """Kills all sub-processes inside-out, performs a system exit."""
+        for key in reversed(self.sub_processes.keys()):
+            self.sub_processes[key].kill()
 
         self.log_handler.log_info('Interrupt received, exiting.')
 
