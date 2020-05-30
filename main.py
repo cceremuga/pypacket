@@ -5,7 +5,6 @@ import time
 
 from pypacket.util.logger import Logger
 from pypacket.base.receiver import Receiver
-from pypacket.base.deserialization import Deserialization
 from pypacket.base.configuration import Configuration
 from pypacket.util.colors import Colors
 from dotenv import load_dotenv
@@ -32,11 +31,8 @@ log_handler = Logger()
 # Initialize configuration.
 runtime_configuration = Configuration()
 
-# Initialize deserialization.
-deserializer = Deserialization()
-
 # The main runner.
-pypacket_receiver = Receiver(log_handler, deserializer, runtime_configuration)
+pypacket_receiver = Receiver(log_handler, runtime_configuration)
 pypacket_receiver.start()
 
 # Handles SIGINT interrupts, exiting the main loop and threads.

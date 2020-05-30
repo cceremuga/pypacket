@@ -14,6 +14,10 @@
     },
     "processors": [
         {
+            "name": "cli",
+            "implementation": "pypacket.implementations.cli_processor.CliProcessor"
+        },
+        {
             "name": "aprs-is",
             "implementation": "pypacket.implementations.aprs_is_processor.AprsIsProcessor",
             "host": "second.aprs.net"
