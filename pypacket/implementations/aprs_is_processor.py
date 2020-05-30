@@ -103,5 +103,5 @@ class AprsIsProcessor(Processor):
                 self.config.beacon_interval()))
 
         beacon = Beacon(self.config)
-        self.handle(beacon)
+        self.is_client.sendall(beacon)
         self.last_beacon = datetime.datetime.now()
