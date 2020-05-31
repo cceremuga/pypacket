@@ -78,13 +78,31 @@ class TestConfiguration:
         assert version == 4.5
 
     def test_beacon_interval_expect_beacon_interval(self):
-        mock_json = '{"beacon_interval":30.0}'
+        mock_json = '{"beacon":{"interval":30.0}}'
         test_configuration = Configuration()
         test_configuration.load_json(mock_json)
 
         beacon_interval = test_configuration.beacon_interval()
 
         assert beacon_interval == 30.0
+
+    def test_beacon_comment_expect_beacon_comment(self):
+        mock_json = '{"beacon":{"comment":"hello, world"}}'
+        test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
+
+        beacon_comment = test_configuration.beacon_comment()
+
+        assert beacon_comment == "hello, world"
+
+    def test_beacon_symbol_expect_beacon_symbol(self):
+        mock_json = '{"beacon":{"symbol":"i"}}'
+        test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
+
+        beacon_symbol = test_configuration.beacon_symbol()
+
+        assert beacon_symbol == "i"
 
     def test_username_expect_username(self):
         self.env = patch.dict('os.environ', {'PYPACKET_USERNAME': 'test'})

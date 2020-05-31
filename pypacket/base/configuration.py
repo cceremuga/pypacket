@@ -44,7 +44,15 @@ class Configuration:
 
     def beacon_interval(self):
         """Gets the beacon interval."""
-        return self.data['beacon_interval']
+        return self.data['beacon']['interval']
+
+    def beacon_comment(self):
+        """Gets the beacon comment."""
+        return self.data['beacon']['comment']
+
+    def beacon_symbol(self):
+        """Gets the beacon symbol."""
+        return self.data['beacon']['symbol']
 
     def username(self):
         """Gets the APRS-IS username (callsign)."""

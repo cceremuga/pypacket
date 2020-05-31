@@ -8,5 +8,5 @@ class Beacon(PositionReport):
         self.tocall = 'APRS'
         self.latitude = float(config.latitude())
         self.longitude = float(config.longitude())
-        self.comment = 'PyPacket IGate v{0}'.format(config.version())
-        self.symbol = 'I'
+        self.comment = '{0} https://pypacket.app v{1}'.format(config.beacon_comment(), config.version())
+        self.symbol = config.beacon_symbol()

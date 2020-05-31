@@ -12,6 +12,11 @@
     "decoder": {
         "implementation": "pypacket.implementations.multimon_decoder.MultimonDecoder"
     },
+    "beacon": {
+        "interval": 10.0,
+        "comment": "Powered by",
+        "symbol": "I"
+    },
     "processors": [
         {
             "name": "cli",

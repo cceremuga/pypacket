@@ -41,6 +41,7 @@ The following are required to be installed and configured on your system.
     * SIGINT is now properly handled, exiting subprocesses before terminating main thread.
     * If configured with latitude and longitude, will transmit an IGate beacon to APRS-IS every X minutes (defaulted to 10, configurable).
     * CLI packet handler has been moved to its own processor class.
+    * New readme logo.
 * 5/6/2020 (v4.1)
     * Simple flat file environment variable support via python-dotenv.
 * 11/17/2019 (v4.0)
