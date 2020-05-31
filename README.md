@@ -59,6 +59,10 @@ The following are required to be installed and configured on your system.
 
 You are welcome to contribute by submitting pull requests on GitHub if you would like. Feature / enhancement requests may be submitted via GitHub issues.
 
+## Security Notes
+
+APRS messages are transmitted on amateur radio frequencies in plaintext for anyone to read. APRS is never private or secure. Connections to APRS-IS are insecure and only intended for licensed amateur radio operators.
+
 ## Credits
 
 * [ ~ Dependencies scanned by PyUp.io ~ ]
