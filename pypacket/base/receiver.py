@@ -2,6 +2,7 @@ import threading
 import re
 import sys
 from subprocess import TimeoutExpired
+from collections import OrderedDict
 
 
 class Receiver:
@@ -30,7 +31,7 @@ class Receiver:
     def __init__(self, log_handler, config):
         """Initializes the instance of Listener and starts listening."""
         self.is_running = False
-        self.sub_processes = {}
+        self.sub_processes = OrderedDict({})
         self.log_handler = log_handler
         self.config = config
         self.worker_thread = None
@@ -58,7 +59,7 @@ class Receiver:
         self.log_handler.log_info('Interrupt received, exiting.')
 
         if self.sub_processes:
-            for key in reversed(self.sub_processes.keys()):
+            for key in reversed(self.sub_processes):
                 self.sub_processes[key].kill()
 
         sys.exit(0)
