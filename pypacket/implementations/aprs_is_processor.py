@@ -56,7 +56,6 @@ class AprsIsProcessor(Processor):
             return
 
         try:
-            print(packet)
             self.is_client.sendall(packet)
 
             # Potentially transmit a beacon.
