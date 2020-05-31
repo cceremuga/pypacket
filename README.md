@@ -1,6 +1,7 @@
-<p align="center"><img src="https://i.imgur.com/MZYHAFG.png" /></p>
+<p align="center"><img src="https://i.imgur.com/HvhAWed.png" width="500" height="auto" /></p>
 
-Receive, decode, log, share [APRS](http://www.aprs.org/) packets using low cost [RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr) devices.
+
+A modular, framework-first, python [APRS](http://www.aprs.org/) logger for low cost [RTL-SDR](http://osmocom.org/projects/sdr/wiki/rtl-sdr) devices. Now with APRS-IS support!
 
 [![Build Status](https://travis-ci.org/cceremuga/pypacket.svg?branch=master)](https://travis-ci.org/cceremuga/pypacket) [![Coverage Status](https://coveralls.io/repos/github/cceremuga/pypacket/badge.svg?branch=master)](https://coveralls.io/github/cceremuga/pypacket?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/55cfa693d652488e994b6782fed2eccc)](https://www.codacy.com/manual/cceremuga_3/pypacket?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cceremuga/pypacket&amp;utm_campaign=Badge_Grade) [![Requirements Status](https://pyup.io/repos/github/cceremuga/pypacket/shield.svg)](https://pyup.io/account/repos/github/cceremuga/pypacket/) [![Requirements Status](https://pyup.io/repos/github/cceremuga/pypacket/python-3-shield.svg)](https://pyup.io/account/repos/github/cceremuga/pypacket/) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 
@@ -13,7 +14,7 @@ The following are required to be installed and configured on your system.
 * Python >= v3.6
 * [rtl_fm](http://osmocom.org/projects/sdr/wiki/rtl-sdr)
 * [multimon-ng](https://github.com/EliasOenal/multimon-ng)
-* Optonally, a call-sign login and password for APRS-IS to upload spots.
+* A callsign login and password for APRS-IS to upload spots (optional).
 
 ## Setup
 
@@ -38,7 +39,8 @@ The following are required to be installed and configured on your system.
     * Thank you to everyone who contributed bug reports, enhancements, and pull requests!
     * Support for squelch level and PPM error configuration options.
     * SIGINT is now properly handled, exiting subprocesses before terminating main thread.
-    * If configured with latitude and longitude, will transmit an IGate beacon to APRS-IS every 10 minutes (configurable).
+    * If configured with latitude and longitude, will transmit an IGate beacon to APRS-IS every X minutes (defaulted to 10, configurable).
+    * CLI packet handler has been moved to its own processor class.
 * 5/6/2020 (v4.1)
     * Simple flat file environment variable support via python-dotenv.
 * 11/17/2019 (v4.0)
