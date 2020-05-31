@@ -28,6 +28,10 @@ The following are required to be installed and configured on your system.
     * See the security notes section below for situational awareness.
 * Run `pip install -r requirements.txt`
 
+## Security Notes
+
+**APRS is never private and never secure.** APRS messages are transmitted on amateur radio frequencies in plaintext for anyone to read. **Connections to APRS-IS are insecure and only intended for licensed amateur radio operators.**
+
 ## Usage
 
 * Run `./main.py`.
@@ -59,10 +63,6 @@ The following are required to be installed and configured on your system.
 ## Contributing
 
 You are welcome to contribute by submitting pull requests on GitHub if you would like. Feature / enhancement requests may be submitted via GitHub issues.
-
-## Security Notes
-
-**APRS is never private and never secure.** APRS messages are transmitted on amateur radio frequencies in plaintext for anyone to read. **Connections to APRS-IS are insecure and only intended for licensed amateur radio operators.**
 
 ## Credits
 
