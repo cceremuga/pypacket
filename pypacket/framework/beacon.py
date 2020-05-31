@@ -10,3 +10,4 @@ class Beacon(PositionReport):
         self.longitude = float(config.longitude())
         self.comment = '{0} https://pypacket.app v{1}'.format(config.beacon_comment(), config.version())
         self.symbol = config.beacon_symbol()
+        self.symbol_table = config.beacon_symbol_table()

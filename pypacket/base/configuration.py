@@ -54,6 +54,10 @@ class Configuration:
         """Gets the beacon symbol."""
         return self.data['beacon']['symbol']
 
+    def beacon_symbol_table(self):
+        """Gets the beacon symbol table."""
+        return self.data['beacon']['symbol_table']
+
     def username(self):
         """Gets the APRS-IS username (callsign)."""
         return os.environ.get('PYPACKET_USERNAME')

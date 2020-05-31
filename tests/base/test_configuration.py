@@ -104,6 +104,15 @@ class TestConfiguration:
 
         assert beacon_symbol == "i"
 
+    def test_beacon_symbol_table_expect_beacon_symbol_table(self):
+        mock_json = '{"beacon":{"symbol_table":"/"}}'
+        test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
+
+        beacon_symbol_table = test_configuration.beacon_symbol_table()
+
+        assert beacon_symbol_table == "/"
+
     def test_username_expect_username(self):
         self.env = patch.dict('os.environ', {'PYPACKET_USERNAME': 'test'})
 

@@ -15,7 +15,8 @@
     "beacon": {
         "interval": 10.0,
         "comment": "Powered by",
-        "symbol": "I"
+        "symbol_table": "I",
+        "symbol": "&"
     },
     "processors": [
         {
