@@ -21,7 +21,7 @@ The following are required to be installed and configured on your system.
 * For optional APRS-IS integration, have the following environment variables set:
     * `PYPACKET_USERNAME` - Your call sign for APRS-IS.
     * `PYPACKET_PASSWORD` - Your password for APRS-IS.
-    * `PYPACKET_LATITUDE` - The latitude for beacon packets. [Read up on ambiguity when utilizing this](http://blog.aprs.fi/2011/01/position-ambiguity-support.html).
+    * `PYPACKET_LATITUDE` - The latitude for optional beacon packets. [Read up on ambiguity when utilizing this](http://blog.aprs.fi/2011/01/position-ambiguity-support.html).
     * `PYPACKET_LONGITUDE` - The longitude for optional beacon packets. [Read up on ambiguity when utilizing this](http://blog.aprs.fi/2011/01/position-ambiguity-support.html).
     * Rename `.env.example` to `.env` and fill in the appropriate values.
 * Run `pip install -r requirements.txt`
