@@ -6,7 +6,7 @@ class MockProcessor(Processor):
         self.log_handler = None
 
     def get_name(self):
-        return "mock"
+        return 'mock'
 
     def load(self, config, log_handler):
         self.log_handler = log_handler

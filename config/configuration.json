@@ -1,4 +1,6 @@
 {
+    "version": "5.0",
+    "beacon_interval": 10.0,
     "listener": {
         "implementation": "pypacket.implementations.rtl_listener.RtlListener",
         "frequency": "144390000",
@@ -10,9 +12,21 @@
     "decoder": {
         "implementation": "pypacket.implementations.multimon_decoder.MultimonDecoder"
     },
-    "processors": [{
-        "name": "aprs-is",
-        "implementation": "pypacket.implementations.aprs_is_processor.AprsIsProcessor",
-        "host": "second.aprs.net"
-    }]
+    "beacon": {
+        "interval": 10.0,
+        "comment": "Powered by",
+        "symbol_table": "I",
+        "symbol": "&"
+    },
+    "processors": [
+        {
+            "name": "cli",
+            "implementation": "pypacket.implementations.cli_processor.CliProcessor"
+        },
+        {
+            "name": "aprs-is",
+            "implementation": "pypacket.implementations.aprs_is_processor.AprsIsProcessor",
+            "host": "second.aprs.net"
+        }
+    ]
 }

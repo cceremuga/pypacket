@@ -2,6 +2,7 @@ import threading
 import re
 import sys
 from subprocess import TimeoutExpired
+from collections import OrderedDict
 
 
 class Receiver:
@@ -27,12 +28,11 @@ class Receiver:
         worker_thread: A separate thread handling all sub-processes.
     """
 
-    def __init__(self, log_handler, deserializer, config):
+    def __init__(self, log_handler, config):
         """Initializes the instance of Listener and starts listening."""
         self.is_running = False
-        self.sub_processes = {}
+        self.sub_processes = OrderedDict({})
         self.log_handler = log_handler
-        self.deserializer = deserializer
         self.config = config
         self.worker_thread = None
         self.processors = None
@@ -55,11 +55,12 @@ class Receiver:
         self.worker_thread.start()
 
     def stop(self):
-        """Stops all sub-processes, performs a system exit."""
-        for key in self.sub_processes:
-            self.sub_processes[key].terminate()
-
+        """Kills all sub-processes inside-out, performs a system exit."""
         self.log_handler.log_info('Interrupt received, exiting.')
+
+        if self.sub_processes:
+            for key in reversed(self.sub_processes):
+                self.sub_processes[key].kill()
 
         sys.exit(0)
 
@@ -96,9 +97,6 @@ class Receiver:
         Args:
             decoded_packet: The raw, decoded APRS packet string.
         """
-        print_friendly_packet = self.deserializer.to_readable_output(decoded_packet)
-        self.log_handler.log_packet(decoded_packet, print_friendly_packet)
-
         for processor in self.processors:
             # Process in all configured processors.
             processor.handle(decoded_packet)

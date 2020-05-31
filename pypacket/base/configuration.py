@@ -1,5 +1,6 @@
 import json
 import importlib
+import os
 
 
 class Configuration:
@@ -30,10 +31,48 @@ class Configuration:
         return self.data['listener']['sample_rate']
 
     def squelch_level(self):
+        """Gets the configured squelch level."""
         return self.data['listener']['squelch_level']
 
     def ppm_error(self):
+        """Gets the configured ppm error."""
         return self.data['listener']['ppm_error']
+
+    def version(self):
+        """Gets the PyPacket version."""
+        return self.data['version']
+
+    def beacon_interval(self):
+        """Gets the beacon interval."""
+        return self.data['beacon']['interval']
+
+    def beacon_comment(self):
+        """Gets the beacon comment."""
+        return self.data['beacon']['comment']
+
+    def beacon_symbol(self):
+        """Gets the beacon symbol."""
+        return self.data['beacon']['symbol']
+
+    def beacon_symbol_table(self):
+        """Gets the beacon symbol table."""
+        return self.data['beacon']['symbol_table']
+
+    def username(self):
+        """Gets the APRS-IS username (callsign)."""
+        return os.environ.get('PYPACKET_USERNAME')
+
+    def password(self):
+        """Gets the APRS-IS password."""
+        return os.environ.get('PYPACKET_PASSWORD')
+
+    def latitude(self):
+        """Gets the beacon latitude."""
+        return os.environ.get('PYPACKET_LATITUDE')
+
+    def longitude(self):
+        """Gets the beacon longitude"""
+        return os.environ.get('PYPACKET_LONGITUDE')
 
     def listener(self):
         """Gets the configured, instantiated listener class."""
@@ -74,6 +113,6 @@ class Configuration:
         self.data = json.loads(json_data)
 
     def __load(self):
-        """Loads in JSON data from the config file, assigning to data."""
+        """Loads in JSON config, assigning to data."""
         with open(self.CONFIG_FILE_NAME) as json_data_file:
             self.data = json.load(json_data_file)

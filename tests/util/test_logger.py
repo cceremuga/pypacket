@@ -34,7 +34,7 @@ class TestLogger:
 
     def test_log_packet_expect_logged(self, capsys):
         mock_packet = 'Hey, check out this packet.'
-        expected_packet = Colors.RESET + "" + Colors.RESET + mock_packet + self.PRINT_SUFFIX
+        expected_packet = Colors.RESET + '' + Colors.RESET + mock_packet + self.PRINT_SUFFIX
 
         Logger().log_packet(mock_packet, mock_packet)
 

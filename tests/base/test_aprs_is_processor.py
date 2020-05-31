@@ -19,8 +19,8 @@ class TestAprsIsProcessor:
 
     @mock.patch('aprslib.IS.connect')
     def test_load_expect_connected(self, mock_connect):
-        environ["PYPACKET_USERNAME"] = "test"
-        environ["PYPACKET_PASSWORD"] = "test"
+        environ['PYPACKET_USERNAME'] = 'test'
+        environ['PYPACKET_PASSWORD'] = 'test'
 
         test_configuration = Configuration()
         test_logger = Logger()
@@ -32,8 +32,8 @@ class TestAprsIsProcessor:
 
     @mock.patch('aprslib.IS.sendall')
     def test_handle_expect_handled(self, mock_handle):
-        environ["PYPACKET_USERNAME"] = "test"
-        environ["PYPACKET_PASSWORD"] = "test"
+        environ['PYPACKET_USERNAME'] = 'test'
+        environ['PYPACKET_PASSWORD'] = 'test'
 
         test_configuration = Configuration()
         test_logger = Logger()
