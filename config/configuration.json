@@ -1,6 +1,7 @@
 {
     "version": "5.0",
     "beacon_interval": 10.0,
+    "debugMode": false,
     "listener": {
         "implementation": "pypacket.implementations.rtl_listener.RtlListener",
         "frequency": "144390000",
@@ -26,7 +27,8 @@
         {
             "name": "aprs-is",
             "implementation": "pypacket.implementations.aprs_is_processor.AprsIsProcessor",
-            "host": "second.aprs.net"
+            "host": "second.aprs.net",
+            "position_precision": 4
         }
     ]
 }

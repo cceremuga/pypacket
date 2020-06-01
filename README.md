@@ -42,9 +42,10 @@ The following are required to be installed and configured on your system.
     * Thank you to everyone who contributed bug reports, enhancements, and pull requests!
     * Support for squelch level and PPM error configuration options.
     * SIGINT is now properly handled, exiting subprocesses before terminating main thread.
-    * If configured with latitude and longitude, will transmit an IGate beacon to APRS-IS every X minutes (defaulted to 10, configurable).
+    * If configured with latitude and longitude, will transmit an IGate beacon to APRS-IS every X minutes (defaulted to 10, configurable). Positional precision setting available to add ambiguity to beacon, defaulted to 4 decimal places.
     * CLI packet handler has been moved to its own processor class.
     * New readme logo.
+    * Added debug mode config option to debug without uploading.
 * 5/6/2020 (v4.1)
     * Simple flat file environment variable support via python-dotenv.
 * 11/17/2019 (v4.0)

@@ -77,6 +77,15 @@ class TestConfiguration:
 
         assert version == 4.5
 
+    def test_debug_mode_expect_debug_mode(self):
+        mock_json = '{"debug_mode":true}'
+        test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
+
+        debug_mode = test_configuration.debug_mode()
+
+        assert debug_mode
+
     def test_beacon_interval_expect_beacon_interval(self):
         mock_json = '{"beacon":{"interval":30.0}}'
         test_configuration = Configuration()
@@ -133,22 +142,86 @@ class TestConfiguration:
 
             assert password == 'supersecure'
 
-    def test_latitude_expect_username(self):
-        self.env = patch.dict('os.environ', {'PYPACKET_LATITUDE': '42'})
+    def test_latitude_expect_latitude(self):
+        mock_json = '{"processors":[{"name":"test","position_precision":0}]}'
+        self.env = patch.dict('os.environ', {'PYPACKET_LATITUDE': '42.123456'})
 
         with self.env:
             test_configuration = Configuration()
+            test_configuration.load_json(mock_json)
 
-            latitude = test_configuration.latitude()
+            latitude = test_configuration.latitude('test')
 
-            assert latitude == '42'
+            assert latitude == 42.123456
 
-    def test_longitude_expect_username(self):
-        self.env = patch.dict('os.environ', {'PYPACKET_LONGITUDE': '-42'})
+    def test_latitude_with_one_place_precision_expect_latitude_truncated(self):
+        mock_json = '{"processors":[{"name":"test","position_precision":1}]}'
+        self.env = patch.dict('os.environ', {'PYPACKET_LATITUDE': '42.123456'})
 
         with self.env:
             test_configuration = Configuration()
+            test_configuration.load_json(mock_json)
 
-            longitude = test_configuration.longitude()
+            latitude = test_configuration.latitude('test')
 
-            assert longitude == '-42'
+            assert latitude == 42.1
+
+    def test_latitude_with_two_places_precision_expect_latitude_truncated(self):
+        mock_json = '{"processors":[{"name":"test","position_precision":2}]}'
+        self.env = patch.dict('os.environ', {'PYPACKET_LATITUDE': '42.123456'})
+
+        with self.env:
+            test_configuration = Configuration()
+            test_configuration.load_json(mock_json)
+
+            latitude = test_configuration.latitude('test')
+
+            assert latitude == 42.12
+
+    def test_latitude_with_three_places_precision_expect_latitude_truncated(self):
+        mock_json = '{"processors":[{"name":"test","position_precision":3}]}'
+        self.env = patch.dict('os.environ', {'PYPACKET_LATITUDE': '42.123456'})
+
+        with self.env:
+            test_configuration = Configuration()
+            test_configuration.load_json(mock_json)
+
+            latitude = test_configuration.latitude('test')
+
+            assert latitude == 42.123
+
+    def test_latitude_with_four_places_precision_expect_latitude_truncated(self):
+        mock_json = '{"processors":[{"name":"test","position_precision":4}]}'
+        self.env = patch.dict('os.environ', {'PYPACKET_LATITUDE': '42.123456'})
+
+        with self.env:
+            test_configuration = Configuration()
+            test_configuration.load_json(mock_json)
+
+            latitude = test_configuration.latitude('test')
+
+            assert latitude == 42.1234
+
+    def test_latitude_with_five_places_precision_expect_latitude_truncated(self):
+        mock_json = '{"processors":[{"name":"test","position_precision":5}]}'
+        self.env = patch.dict('os.environ', {'PYPACKET_LATITUDE': '42.123456'})
+
+        with self.env:
+            test_configuration = Configuration()
+            test_configuration.load_json(mock_json)
+
+            latitude = test_configuration.latitude('test')
+
+            assert latitude == 42.12345
+
+    def test_longitude_expect_longitude(self):
+        mock_json = '{"processors":[{"name":"test","position_precision":0}]}'
+        self.env = patch.dict('os.environ', {'PYPACKET_LONGITUDE': '-42.123456'})
+
+        with self.env:
+            test_configuration = Configuration()
+            test_configuration.load_json(mock_json)
+
+            longitude = test_configuration.longitude('test')
+
+            assert longitude == -42.123456

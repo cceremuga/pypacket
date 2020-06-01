@@ -56,7 +56,7 @@ class AprsIsProcessor(Processor):
             return
 
         try:
-            self.is_client.sendall(packet)
+            self.__send_packet(packet)
 
             # Potentially transmit a beacon.
             self.__send_beacon()
@@ -80,7 +80,11 @@ class AprsIsProcessor(Processor):
 
     def __send_beacon(self):
         """ Transmits a beacon on connect if lat/long is set. """
-        if not self.config.latitude() or not self.config.longitude():
+        processor_name = self.get_name
+        latitude = self.config.latitude(processor_name)
+        longitude = self.config.longitude(processor_name)
+
+        if not latitude or not longitude:
             return
 
         # Only send beacon if X minute(s) has passed since last beacon.
@@ -96,11 +100,15 @@ class AprsIsProcessor(Processor):
 
         self.log_handler.log_info(
             'Sending IGate beacon for {0} {1}. Another will send in approximately {2} minute(s) when a packet is received.'.
-            format(
-                self.config.latitude(),
-                self.config.longitude(),
-                self.config.beacon_interval()))
+            format(latitude, longitude, self.config.beacon_interval()))
 
-        beacon = Beacon(self.config)
-        self.is_client.sendall(beacon)
+        beacon = Beacon(self.config, self.get_name())
+        self.__send_packet(beacon)
         self.last_beacon = datetime.datetime.now()
+
+    def __send_packet(self, packet):
+        """Central place for sending packets to the connected client."""
+        if self.config.debug_mode():
+            return
+
+        self.is_client.sendall(packet)

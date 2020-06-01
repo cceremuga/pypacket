@@ -1,6 +1,7 @@
 import json
 import importlib
 import os
+import math
 
 
 class Configuration:
@@ -42,6 +43,10 @@ class Configuration:
         """Gets the PyPacket version."""
         return self.data['version']
 
+    def debug_mode(self):
+        """Gets the debug mode setting."""
+        return self.data['debug_mode']
+
     def beacon_interval(self):
         """Gets the beacon interval."""
         return self.data['beacon']['interval']
@@ -66,13 +71,30 @@ class Configuration:
         """Gets the APRS-IS password."""
         return os.environ.get('PYPACKET_PASSWORD')
 
-    def latitude(self):
+    def latitude(self, host_name):
         """Gets the beacon latitude."""
-        return os.environ.get('PYPACKET_LATITUDE')
+        latitude = os.environ.get('PYPACKET_LATITUDE')
 
-    def longitude(self):
+        if latitude is None:
+            return latitude
+        else:
+            latitude = float(latitude)
+
+        precision = self.__position_precision(host_name)
+
+        return self.__truncate_postion(latitude, precision)
+
+    def longitude(self, host_name):
         """Gets the beacon longitude"""
-        return os.environ.get('PYPACKET_LONGITUDE')
+        longitude = os.environ.get('PYPACKET_LONGITUDE')
+        precision = self.__position_precision(host_name)
+
+        if longitude is None:
+            return longitude
+        else:
+            longitude = float(longitude)
+
+        return self.__truncate_postion(longitude, precision)
 
     def listener(self):
         """Gets the configured, instantiated listener class."""
@@ -100,19 +122,37 @@ class Configuration:
 
         return processors
 
-    def host(self, name):
+    def host(self, processor_name):
         """Gets the configured processor host."""
-        for processor in self.data['processors']:
-            if processor['name'] == name:
-                return processor['host']
-
-        return ''
+        return self.__get_from_processor(processor_name, 'host')
 
     def load_json(self, json_data):
         """Loads in JSON data from a String, assigning to data."""
         self.data = json.loads(json_data)
 
+    def __position_precision(self, processor_name):
+        """Gets the configured processor's precision."""
+        return self.__get_from_processor(processor_name, 'position_precision')
+
+    def __get_from_processor(self, processor_name, key):
+        """Gets the key from the processor host."""
+        for processor in self.data['processors']:
+            if processor['name'] == processor_name:
+                return processor[key]
+
+        return ''
+
     def __load(self):
         """Loads in JSON config, assigning to data."""
         with open(self.CONFIG_FILE_NAME) as json_data_file:
             self.data = json.load(json_data_file)
+
+    def __truncate_postion(self, lat_or_long, precision):
+        if precision == 0:
+            return lat_or_long
+
+        return self.__truncate(lat_or_long, precision)
+
+    def __truncate(self, number, digits) -> float:
+        stepper = 10.0 ** digits
+        return math.trunc(stepper * number) / stepper

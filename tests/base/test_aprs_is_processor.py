@@ -9,7 +9,9 @@ from pypacket.util.logger import Logger
 class TestAprsIsProcessor:
     @mock.patch('aprslib.IS.connect')
     def test_load_env_vars_not_set_expect_not_connected(self, mock_connect):
+        mock_json = '{"debug_mode":false,"processors":[{"name":"aprs-is","host":"example.com","position_precision":0}]}'
         test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
         test_logger = Logger()
         processor = AprsIsProcessor()
 
@@ -22,7 +24,9 @@ class TestAprsIsProcessor:
         environ['PYPACKET_USERNAME'] = 'test'
         environ['PYPACKET_PASSWORD'] = 'test'
 
+        mock_json = '{"debug_mode":false,"processors":[{"name":"aprs-is","host":"example.com","position_precision":0}]}'
         test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
         test_logger = Logger()
         processor = AprsIsProcessor()
 
@@ -35,7 +39,9 @@ class TestAprsIsProcessor:
         environ['PYPACKET_USERNAME'] = 'test'
         environ['PYPACKET_PASSWORD'] = 'test'
 
+        mock_json = '{"debug_mode":false,"processors":[{"name":"aprs-is","host":"example.com","position_precision":0}]}'
         test_configuration = Configuration()
+        test_configuration.load_json(mock_json)
         test_logger = Logger()
         processor = AprsIsProcessor()
         processor.is_connected = True
