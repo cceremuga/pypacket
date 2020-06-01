@@ -71,25 +71,24 @@ class Configuration:
         """Gets the APRS-IS password."""
         return os.environ.get('PYPACKET_PASSWORD')
 
-    def latitude(self, host_name):
+    def latitude(self, processor_name):
         """Gets the beacon latitude."""
         latitude = os.environ.get('PYPACKET_LATITUDE')
 
         if latitude is None:
             return latitude
 
-        precision = self.__position_precision(host_name)
-
+        precision = self.__position_precision(processor_name)
         return self.__truncate_postion(float(latitude), precision)
 
-    def longitude(self, host_name):
+    def longitude(self, processor_name):
         """Gets the beacon longitude"""
         longitude = os.environ.get('PYPACKET_LONGITUDE')
-        precision = self.__position_precision(host_name)
 
         if longitude is None:
             return longitude
 
+        precision = self.__position_precision(processor_name)
         return self.__truncate_postion(float(longitude), precision)
 
     def listener(self):
@@ -149,6 +148,6 @@ class Configuration:
 
         return self.__truncate(lat_or_long, precision)
 
-    def __truncate(self, number, digits) -> float:
+    def __truncate(self, number, digits):
         stepper = 10.0 ** digits
         return math.trunc(stepper * number) / stepper
