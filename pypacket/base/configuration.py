@@ -77,12 +77,10 @@ class Configuration:
 
         if latitude is None:
             return latitude
-        else:
-            latitude = float(latitude)
 
         precision = self.__position_precision(host_name)
 
-        return self.__truncate_postion(latitude, precision)
+        return self.__truncate_postion(float(latitude), precision)
 
     def longitude(self, host_name):
         """Gets the beacon longitude"""
@@ -91,10 +89,8 @@ class Configuration:
 
         if longitude is None:
             return longitude
-        else:
-            longitude = float(longitude)
 
-        return self.__truncate_postion(longitude, precision)
+        return self.__truncate_postion(float(longitude), precision)
 
     def listener(self):
         """Gets the configured, instantiated listener class."""
