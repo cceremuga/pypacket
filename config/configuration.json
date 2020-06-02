@@ -1,7 +1,7 @@
 {
     "version": "5.0",
     "beacon_interval": 10.0,
-    "debug_mode": true,
+    "debug_mode": false,
     "listener": {
         "implementation": "pypacket.implementations.rtl_listener.RtlListener",
         "frequency": "144390000",
