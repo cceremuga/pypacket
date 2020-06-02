@@ -79,7 +79,7 @@ class Configuration:
             return latitude
 
         precision = self.__position_precision(processor_name)
-        return self.__truncate_postion(float(latitude), precision)
+        return self.__truncate_postion(float(latitude), float(precision))
 
     def longitude(self, processor_name):
         """Gets the beacon longitude"""

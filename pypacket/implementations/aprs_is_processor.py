@@ -80,7 +80,7 @@ class AprsIsProcessor(Processor):
 
     def __send_beacon(self):
         """ Transmits a beacon on connect if lat/long is set. """
-        processor_name = self.get_name
+        processor_name = self.get_name()
         latitude = self.config.latitude(processor_name)
         longitude = self.config.longitude(processor_name)
 
