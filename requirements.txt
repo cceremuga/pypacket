@@ -1,6 +1,6 @@
 aprslib==0.6.47
 coveralls==2.0.0
-pytest==5.4.2
+pytest==5.4.3
 pytest-cov==2.9.0
 terminaltables==3.1.0
 python-dotenv==0.13.0
