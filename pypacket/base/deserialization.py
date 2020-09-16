@@ -31,6 +31,7 @@ class Deserialization:
                     "To       ",
                     "Lat     ",
                     "Long    ",
+                    "Alt     ",
                     "Comment                    ",
                     "Text                       "
                 ], [
@@ -38,6 +39,7 @@ class Deserialization:
                     self.__get_formatted(packet, 'to', 9),
                     self.__get_formatted(packet, 'latitude', 8),
                     self.__get_formatted(packet, 'longitude', 8),
+                    self.__get_formatted(packet, 'altitude', 8),
                     self.__get_formatted(packet, 'comment', 27),
                     self.__get_formatted(packet, 'text', 27),
                 ]
