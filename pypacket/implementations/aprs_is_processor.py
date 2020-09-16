@@ -29,6 +29,10 @@ class AprsIsProcessor(Processor):
         self.log_handler = log_handler
 
         username = self.config.username()
+
+        # Strip SSID from username for APRS-IS login
+        username = username.split("-")[0].strip()
+
         password = self.config.password()
 
         if not username or not password:
