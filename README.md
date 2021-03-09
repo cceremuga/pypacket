@@ -1,5 +1,3 @@
-<p align="center"><img src="https://i.imgur.com/HvhAWed.png" width="500" height="auto" /></p>
-
 ## Sunsetting PyPacket
 
 **As of March, 2021, any further development with respect to new features, functionality, or bug fixes for PyPacket has ceased.** This is in support of an effort to transition development over to my next project, [Ionosphere](https://github.com/cceremuga/ionosphere). That is intended to be a long term replacement for this project.
