@@ -1,4 +1,4 @@
-aprslib==0.6.47
+aprslib==0.7.1
 pytest==6.2.2
 coveralls==3.0.1
 pytest-cov==3.0.0
